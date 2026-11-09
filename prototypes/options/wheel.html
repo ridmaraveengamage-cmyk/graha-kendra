@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Sky Wheel</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Manrope:wght@400;500;700&display=swap">
+<style>
+/* Layout: a single night-sky look by choice. The wheel on the left, the explanation of whatever you tap on the right; stacks on phones. */
+:root{--bg:#0b1020;--panel:#121a33;--ink:#ece9f6;--muted:#9aa3c7;--line:#26305a;--gold:#f1c45c;--gold-soft:#3a3016;
+ --good:#5fd3a2;--good-bg:#123628;--mixed:#f1c45c;--mixed-bg:#3a3016;--hard:#ff8b7a;--hard-bg:#3d1c1a;--slice:#151d3a;--slice-alt:#18213f;
+ --display:"Marcellus","Palatino Linotype",Georgia,serif;--body:"Manrope","Segoe UI",system-ui,sans-serif;color-scheme:dark}
+*{box-sizing:border-box}html{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--body)}
+.wrap{max-width:1180px;margin:0 auto;padding-block:20px 56px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:20px}
+h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;line-height:1.2;text-wrap:balance}
+h1{font-size:clamp(1.9rem,4vw,2.5rem);letter-spacing:.02em}h2{font-size:1.6rem}h3{font-size:1.1rem;color:var(--gold)}
+p{margin:0}.muted{color:var(--muted)}
+.top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}.top a{color:var(--gold);font-weight:700;text-decoration:none}
+.bf{display:flex;flex-wrap:wrap;gap:10px;align-items:end;border:1px solid var(--line);border-radius:14px;padding:14px;background:var(--panel)}
+.f{display:grid;gap:3px;font-size:.8rem;font-weight:700;color:var(--muted);flex:1 1 130px;min-width:0}
+input,select{font:inherit;font-size:.95rem;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;width:100%;min-width:0}
+.go{font:inherit;font-weight:700;background:var(--gold);color:var(--bg);border:0;border-radius:8px;padding:10px 16px;cursor:pointer}
+.adv{flex-basis:100%;font-size:.85rem;color:var(--muted)}.adv summary{cursor:pointer}.advrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}.hint{font-size:.8rem;margin-top:6px}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.stage{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:22px;align-items:start}
+@media (max-width:860px){.stage{grid-template-columns:minmax(0,1fr)}}
+.wheelbox{display:grid;gap:10px}
+svg.wheel{width:100%;max-width:620px;height:auto;display:block;margin:0 auto;touch-action:manipulation}
+.sl{cursor:pointer}.sl path{fill:var(--slice);stroke:var(--line);stroke-width:1.2;transition:fill .15s}
+.sl:nth-child(even) path{fill:var(--slice-alt)}
+.sl:hover path{fill:#202a50}.sl.sel path{fill:var(--gold-soft);stroke:var(--gold)}
+.sl .ar{fill:var(--ink);font:700 12.5px var(--body)}.sl .sg{fill:var(--muted);font:11px var(--body)}
+.pl{cursor:pointer}.pl circle{fill:var(--bg);stroke:var(--gold);stroke-width:1.6}.pl text{fill:var(--gold);font:700 12px var(--body)}
+.pl.sel circle{fill:var(--gold)}.pl.sel text{fill:var(--bg)}
+.tr circle{fill:none;stroke:var(--muted);stroke-dasharray:2 2}.tr text{fill:var(--muted);font:600 10px var(--body)}
+.ring{fill:none;stroke:var(--line)}
+.ctr{fill:var(--ink);font:20px var(--display)}.ctr2{fill:var(--muted);font:12px var(--body)}
+.lag{stroke:var(--gold);stroke-width:2.5}
+.toggles{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.tg{font:inherit;font-size:.85rem;font-weight:700;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:999px;padding:5px 12px;cursor:pointer}
+.tg[aria-pressed="true"]{border-color:var(--gold);color:var(--gold)}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;display:grid;gap:14px}
+.q{display:inline-block;font-size:.78rem;font-weight:700;border-radius:999px;padding:2px 10px;font-family:var(--body)}
+.q-good{background:var(--good-bg);color:var(--good)}.q-mixed{background:var(--mixed-bg);color:var(--mixed)}.q-hard{background:var(--hard-bg);color:var(--hard)}
+.blk{display:grid;gap:4px;border-top:1px solid var(--line);padding-top:12px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chips button{font:inherit;font-size:.85rem;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:999px;padding:3px 11px;cursor:pointer}
+.now{background:var(--gold-soft);border-radius:12px;padding:12px 14px}
+.foot{font-size:.82rem;color:var(--muted);max-width:80ch}
+</style></head><body>
+<div class="wrap">
+ <div class="top"><h1>Your sky wheel</h1><a href="index.html">All designs</a></div>
+ <div id="details"></div>
+ <div class="stage">
+  <div class="wheelbox"><svg class="wheel" id="wheel" viewBox="0 0 640 640" role="img" aria-label="Birth chart wheel"></svg>
+   <div class="toggles"><button class="tg" id="t-today" aria-pressed="false">Show today's sky</button><button class="tg" id="t-reset">Start here</button></div>
+   <p class="muted" style="text-align:center;font-size:.85rem">The wheel is your birth chart. Each slice is one area of life; the gold line marks your rising sign. Tap a slice or a planet.</p></div>
+  <aside class="panel" id="panel" aria-live="polite"></aside>
+ </div>
+ <p class="foot">Slices are whole-sign houses counted from your rising sign (lagna); planets sit at their sidereal degree (Lahiri ayanamsa). "Today's sky" shows where the planets are now, on the dashed outer ring. Readings follow classical Parashari rules. For guidance and reflection only.</p>
+</div>
+<script src="readings.js"></script><script src="core.js"></script><script src="shared.js"></script>
+<script>
+const CX=320,CY=320,R0=112,R1=262,RT=292;let SHOW_TODAY=false,SEL={type:'start'};
+const ang=(h,deg)=>180+(h-1)*30+(deg||0);
+const pt=(r,a)=>[CX+r*Math.cos(a*Math.PI/180),CY-r*Math.sin(a*Math.PI/180)];
+function sector(h){const a0=ang(h,0),a1=ang(h,30),[x0,y0]=pt(R1,a0),[x1,y1]=pt(R1,a1),[x2,y2]=pt(R0,a1),[x3,y3]=pt(R0,a0);return `M${x0} ${y0}A${R1} ${R1} 0 0 0 ${x1} ${y1}L${x2} ${y2}A${R0} ${R0} 0 0 1 ${x3} ${y3}Z`}
+function draw(){let s='';
+ for(let h=1;h<=12;h++){const sg=(A.lag+h-1)%12,[ax,ay]=pt(236,ang(h,15)),[sx,sy]=pt(132,ang(h,15));
+  s+=`<g class="sl${SEL.type==='house'&&SEL.h===h?' sel':''}" data-h="${h}" tabindex="0" role="button" aria-label="${AREA[h-1]}"><path d="${sector(h)}"/><text class="ar" x="${ax}" y="${ay+4}" text-anchor="middle">${AREA_SHORT[h-1]}</text><text class="sg" x="${sx}" y="${sy+4}" text-anchor="middle">${SIGNS[sg][1].slice(0,3)}</text></g>`}
+ const [lx0,ly0]=pt(R0-6,180),[lx1,ly1]=pt(RT+8,180);s+=`<line class="lag" x1="${lx0}" y1="${ly0}" x2="${lx1}" y2="${ly1}"/>`;
+ s+=`<circle class="ring" cx="${CX}" cy="${CY}" r="${R0}"/>`;
+ // natal planets, nudged apart when close
+ const items=ORDER.map(p=>({p,h:A.planets[p].house,d:A.planets[p].lon%30})).sort((a,b)=>ang(a.h,a.d)-ang(b.h,b.d));
+ let last=-99,alt=0;for(const it of items){const a=ang(it.h,Math.min(27,Math.max(3,it.d)));alt=(a-last<9)?alt+1:0;last=a;const r=[188,160,212][alt%3],[x,y]=pt(r,a);
+  s+=`<g class="pl${SEL.type==='planet'&&SEL.p===it.p?' sel':''}" data-p="${it.p}" tabindex="0" role="button" aria-label="${P[it.p].n}"><circle cx="${x}" cy="${y}" r="15"/><text x="${x}" y="${y+4}" text-anchor="middle">${it.p}</text></g>`}
+ if(SHOW_TODAY){const T=transitInfo();s+=`<circle class="ring" cx="${CX}" cy="${CY}" r="${RT}" stroke-dasharray="3 4"/>`;let la=-99,al=0;
+  for(const p of ORDER.slice().sort((a,b)=>ang(T[a].fromLag,T[a].lon%30)-ang(T[b].fromLag,T[b].lon%30))){const a=ang(T[p].fromLag,T[p].lon%30);al=(a-la<7)?al+1:0;la=a;const [x,y]=pt(RT+(al%2?14:-2),a);s+=`<g class="tr"><circle cx="${x}" cy="${y}" r="11"/><text x="${x}" y="${y+3.5}" text-anchor="middle">${p}</text></g>`}}
+ const b=A.birth;s+=`<text class="ctr" x="${CX}" y="${CY-8}" text-anchor="middle">${esc((b.name||'Your chart').slice(0,18))}</text><text class="ctr2" x="${CX}" y="${CY+14}" text-anchor="middle">${b.d}/${b.m}/${b.y} · ${esc(b.place)}</text><text class="ctr2" x="${CX}" y="${CY+32}" text-anchor="middle">Rising ${SIGNS[A.lag][1]}</text>`;
+ document.getElementById('wheel').innerHTML=s}
+function panelStart(){const{md,ad}=currentDasha(),q=md?quality(md.lord,ad.lord):'mixed',pp=md?plainPeriod(md.lord,ad.lord):null,nd=NAK_D[A.planets.Mo.nak.i];
+ const ranked=[1,2,4,5,7,9,10,11].map(h=>[h,A.houseScore(h)]).sort((a,b)=>b[1]-a[1]);
+ return `<h2>Start here</h2>
+ <p><b>Rising sign ${SIGNS[A.lag][1]}.</b> ${LAGNA_D[A.lag].nature} ${LAGNA_D[A.lag].str}</p>
+ <p><b>Moon in ${SIGNS[A.moonS][1]}, birth star ${A.planets.Mo.nak.name}.</b> ${nd[3]}</p>
+ ${md?`<div class="now"><p><b>Right now:</b> ${P[md.lord].n} chapter, ${P[ad.lord].n} phase until ${fmtMonth(ad.end)} <span class="q q-${q}">${QLABEL[q]}</span></p><p class="muted">${pp.brings}</p></div>`:''}
+ <div class="blk"><h3>Your strongest areas</h3><div class="chips">${ranked.slice(0,3).map(([h])=>`<button data-h="${h}">${AREA[h-1]}</button>`).join('')}</div></div>
+ <div class="blk"><h3>Areas that need care</h3><div class="chips">${[1,2,4,5,6,7,8,9,10,11,12].filter(h=>A.houseScore(h)<0).slice(0,4).map(h=>`<button data-h="${h}">${AREA[h-1]}</button>`).join('')||'<span class="muted">None stand out.</span>'}</div></div>`}
+function panelHouse(h){const [q,lbl]=areaLevel(h),sg=(A.lag+h-1)%12,story=houseStory(h),ek={2:'wealth',4:'property',5:'children',7:'marriage',9:'education',10:'career',11:'wealth',12:'foreign'}[h],w=ek?bestWindow(ek):null;
+ return `<p class="muted">${ord(h)} house · ${SIGNS[sg][0]} (${SIGNS[sg][1]})</p><div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline"><h2>${AREA[h-1]}</h2><span class="q q-${q}">${lbl}</span></div>
+ <p class="muted">${HOUSE_D[h-1].t}</p>
+ <div class="blk"><h3>How it looks for you</h3>${story.map(t=>`<p>${t}</p>`).join('')}</div>
+ ${w?`<div class="blk"><h3>Best time ahead for ${EV_PLAIN[ek].toLowerCase()}</h3><p><b>${windowWhen(w)}</b>, during your ${P[w.md].n}–${P[w.ad].n} phase.</p></div>`:''}
+ <div class="blk"><h3>Most active during</h3><p>${activation(h)}</p></div>
+ <div class="blk"><h3>Planets involved</h3><div class="chips">${[...new Set([A.lordOf(h),...A.occupants(h)])].map(p=>`<button data-p="${p}">${P[p].n}</button>`).join('')}</div></div>`}
+function panelPlanet(p){const x=A.planets[p],fn=funcNature(p),q=lordQ(p)>=0.75?'good':lordQ(p)<=-0.4?'hard':'mixed',now=Date.now();
+ const next=A.dasha.flatMap(d=>d.subs.map(s=>({...s,md:d.lord}))).filter(s=>s.lord===p&&s.end>now).slice(0,2);
+ const pp=plainPeriod(p);
+ return `<p class="muted">${P[p].v} · ${SIGNS[x.sign][1]} ${dms(x.lon)} · ${x.nak.name}</p><div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline"><h2>${P[p].n}</h2><span class="q q-${q}">${q==='good'?'On your side':q==='hard'?'Tests you':'Mixed'}</span></div>
+ <p>${P[p].n} stands for ${PLANET_PLAIN[p]}. In your chart it ${fnPlain(p)}${x.dig.label!=='—'&&x.dig.label!=='Neutral'?` and is ${x.dig.label==='Own sign'?'in its own sign':x.dig.label.toLowerCase()}`:''}.</p>
+ <div class="blk"><h3>Where it sits: ${AREA[x.house-1].toLowerCase()}</h3><p>${PIH[p][x.house-1]}</p></div>
+ ${owned(p).length?`<div class="blk"><h3>Areas it rules</h3>${owned(p).map(h=>`<p><b>${AREA[h-1]}.</b> ${LIH[h-1][x.house-1]}</p>`).join('')}</div>`:''}
+ <div class="blk"><h3>When it is in charge</h3><p>${next.length?next.map(s=>`${P[s.md].n}–${P[p].n} phase, ${fmtMonth(Math.max(s.start,now))} – ${fmtMonth(s.end)}`).join('; '):'No phase in the coming years.'}</p></div>
+ <div class="blk"><h3>What to do</h3><p>${pp.todo}</p></div>`}
+function render(){draw();const pn=document.getElementById('panel');pn.innerHTML=SEL.type==='house'?panelHouse(SEL.h):SEL.type==='planet'?panelPlanet(SEL.p):panelStart()}
+function pick(t){const g=t.closest('[data-h],[data-p]');if(!g)return;SEL=g.dataset.p?{type:'planet',p:g.dataset.p}:{type:'house',h:+g.dataset.h};render();if(innerWidth<860&&g.closest('#panel')===null)document.getElementById('panel').scrollIntoView({behavior:'smooth',block:'start'})}
+['wheel','panel'].forEach(id=>{const el=document.getElementById(id);el.addEventListener('click',e=>pick(e.target));el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();pick(e.target)}})});
+document.getElementById('t-today').addEventListener('click',e=>{SHOW_TODAY=!SHOW_TODAY;e.currentTarget.setAttribute('aria-pressed',SHOW_TODAY);draw()});
+document.getElementById('t-reset').addEventListener('click',()=>{SEL={type:'start'};render()});
+mountForm(document.getElementById('details'),()=>{SEL={type:'start'};render()});
+</script></body></html>

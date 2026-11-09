@@ -1,0 +1,287 @@
+<title>Graha Kendra Homepages</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gilda+Display&family=Italiana&family=Cinzel:wght@400;600&family=Jost:wght@300;400;500&display=swap">
+<style>
+/* Layout: a switcher bar on top; below it, one full homepage mockup at a time (three cosmic directions, all dark by design). */
+:root{color-scheme:dark;--sw-bg:#0d0d14;--sw-ink:#e9e7f2;--sw-mut:#8d8aa3;--sw-line:#2a2838;
+ --body:"Jost","Segoe UI",system-ui,sans-serif}
+*{box-sizing:border-box}
+body{background:#05050a;color:#ece9f5;font:16px/1.6 var(--body);font-weight:300}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--sw-bg)}
+.switch{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--sw-bg);border-bottom:1px solid var(--sw-line)}
+.switch .in{max-width:1240px;margin:0 auto;padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.switch b{font-weight:500;font-size:.85rem;color:var(--sw-mut);margin-right:6px}
+.switch button{font:inherit;font-size:.9rem;font-weight:400;color:var(--sw-ink);background:none;border:1px solid var(--sw-line);border-radius:999px;padding:5px 14px;cursor:pointer}
+.switch button[aria-pressed="true"]{background:var(--sw-ink);color:var(--sw-bg)}
+.switch .desc{flex-basis:100%;font-size:.85rem;color:var(--sw-mut)}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid #fff;outline-offset:3px}
+.g{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.cap{max-width:1180px;margin:0 auto}
+canvas.stars{position:absolute;inset:0;width:100%;height:100%;display:block}
+.eyebrow{font-size:.78rem;letter-spacing:.24em;text-transform:uppercase;font-weight:500}
+.ghost{display:inline-block;font:inherit;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;font-weight:500;background:none;border:1px solid currentColor;padding:12px 22px;cursor:pointer;text-decoration:none}
+.hscroll{display:flex;gap:14px;overflow-x:auto;padding-bottom:10px;scroll-snap-type:x mandatory;scrollbar-width:thin}
+.hscroll>*{scroll-snap-align:start;flex:none}
+input,select{font:inherit;font-weight:400;color:inherit;background:transparent;border:0;border-bottom:1px solid currentColor;padding:8px 2px;width:100%;min-width:0}
+select option{color:#000}
+label.fl{display:grid;gap:2px;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;min-width:0}
+.mock{display:block;scroll-margin-top:calc(60px + env(safe-area-inset-top,0px))}
+.label{background:#f4f1ea;color:#111;padding-block:22px;border-top:8px solid #05050a}
+.label .cap{display:flex;gap:14px;align-items:baseline;flex-wrap:wrap}
+.label b{font-family:"Gilda Display",Georgia,serif;font-weight:400;font-size:1.8rem}
+.label span{color:#444;max-width:70ch}
+@media (prefers-reduced-motion:no-preference){.drift{animation:drift 18s ease-in-out infinite alternate}@keyframes drift{to{transform:translate(-14px,10px)}}
+ #temple .kd svg{animation:pulse 4s ease-in-out infinite alternate}@keyframes pulse{to{filter:drop-shadow(0 0 30px #dcaa4c99)}}}
+
+/* ---------- A · Cosmos ---------- */
+#cosmos{--bg:#07060f;--ink:#f1eef9;--mut:#a9a3c4;--lilac:#c7b6ff;--rose:#f3a9cb;--card:#0f0d1c;--line:#2b2645;--disp:"Gilda Display",Georgia,serif;background:var(--bg);color:var(--ink)}
+#cosmos nav{position:absolute;inset:0 0 auto;z-index:3}
+#cosmos nav .cap{display:flex;align-items:center;gap:22px;padding-block:22px;flex-wrap:wrap}
+#cosmos nav a{color:var(--ink);text-decoration:none;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;font-weight:500}
+#cosmos nav .logo{display:flex;align-items:center;gap:10px;margin-right:auto;letter-spacing:.3em}
+#cosmos nav .ghost{color:var(--rose);padding:9px 16px}
+#cosmos .hero{position:relative;min-height:640px;overflow:hidden;display:grid;place-items:center;text-align:center}
+#cosmos .planet{position:absolute;border-radius:50%}
+#cosmos .p1{width:620px;height:620px;right:-170px;top:-150px;background:radial-gradient(circle at 30% 35%,#8f86d6 0%,#4b3f8f 32%,#1d1838 62%,#07060f 80%);box-shadow:-40px 40px 140px -20px #c46fd055}
+#cosmos .p2{width:120px;height:120px;left:12%;top:160px;background:radial-gradient(circle at 35% 30%,#c9a7d6,#5a3b6e 55%,#120e1f 80%)}
+#cosmos .p3{width:230px;height:230px;left:20%;bottom:-90px;background:radial-gradient(circle at 40% 30%,#6f6a8f,#26233c 60%,#07060f 82%)}
+#cosmos .orbit{position:absolute;border:1px solid #ffffff1c;border-radius:50%;width:1300px;height:520px;left:50%;top:52%;transform:translate(-50%,-50%) rotate(-12deg)}
+#cosmos .glow{position:absolute;width:420px;height:420px;left:36%;top:-60px;border-radius:50%;background:radial-gradient(circle,#f3a9cb44,transparent 65%)}
+#cosmos .hero .txt{position:relative;z-index:2;display:grid;gap:18px;justify-items:center;padding-top:60px}
+#cosmos h1{font-family:var(--disp);font-weight:400;font-size:clamp(3.2rem,10vw,7rem);line-height:.95;margin:0}
+#cosmos .sub{max-width:34ch;font-size:1.15rem;color:#dcd6ee}
+#cosmos .hero .ghost{color:var(--ink)}
+#cosmos .more{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mut);display:grid;justify-items:center;gap:6px;margin-top:10px}
+#cosmos section.s{padding-block:84px;position:relative}
+#cosmos h2{font-family:var(--disp);font-weight:400;font-size:clamp(2rem,4.6vw,3.2rem);line-height:1.1;margin:8px 0 14px;text-wrap:balance}
+#cosmos .eyebrow{color:var(--rose)}
+#cosmos .center{text-align:center;display:grid;justify-items:center}
+#cosmos .lead{color:var(--mut);max-width:60ch}
+#cosmos .rcard{width:170px;border:1px solid var(--line);background:var(--card);padding:22px 16px;display:grid;gap:4px;justify-items:center;text-align:center}
+#cosmos .rcard .gl{font-family:var(--disp);font-size:2.4rem;color:var(--lilac);line-height:1}
+#cosmos .rcard b{font-family:var(--disp);font-weight:400;font-size:1.3rem}
+#cosmos .rcard span{font-size:.85rem;color:var(--mut)}
+#cosmos .rcard .ghost{color:var(--rose);padding:7px 14px;font-size:.7rem;margin-top:10px}
+#cosmos .split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:center}
+@media (max-width:820px){#cosmos .split{grid-template-columns:minmax(0,1fr)}}
+#cosmos .form{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin:22px 0;color:var(--ink)}
+@media (max-width:560px){#cosmos .form{grid-template-columns:minmax(0,1fr)}}
+#cosmos .chartart svg{width:100%;max-width:420px;display:block;margin:0 auto;filter:drop-shadow(0 0 24px #c7b6ff44)}
+#cosmos .today{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+#cosmos .today div{padding:22px 18px;display:grid;gap:4px;border-right:1px solid var(--line)}
+#cosmos .today .v{font-family:var(--disp);font-size:1.5rem}
+#cosmos .today .k{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mut)}
+#cosmos .arts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:22px}
+#cosmos .art{display:grid;gap:10px}
+#cosmos .art .img{aspect-ratio:4/3;max-width:100%;background:radial-gradient(circle at 70% 30%,#f3a9cb55,transparent 50%),radial-gradient(circle at 30% 80%,#7d6fe066,transparent 55%),#120f22;border:1px solid var(--line)}
+#cosmos .art:nth-child(2) .img{background:radial-gradient(circle at 50% 50%,#c7b6ff66 0 18%,transparent 19%),radial-gradient(circle at 50% 50%,#ffffff10,transparent 60%),#0d0b1a}
+#cosmos .art:nth-child(3) .img{background:radial-gradient(circle at 25% 40%,#e7c27a55,transparent 45%),radial-gradient(circle at 75% 65%,#f3a9cb44,transparent 50%),#120f22}
+#cosmos .art h3{font-family:var(--disp);font-weight:400;font-size:1.4rem;margin:0;line-height:1.2}
+#cosmos .art small{color:var(--mut)}
+#cosmos .cta{border:1px solid var(--line);padding:56px 24px;text-align:center;display:grid;justify-items:center;gap:12px;background:radial-gradient(ellipse at 50% 0,#3a2b6b66,transparent 70%)}
+#cosmos footer{border-top:1px solid var(--line);padding-block:30px;color:var(--mut);font-size:.85rem}
+
+/* ---------- B · Moonlight ---------- */
+#moon{--bg:#051316;--ink:#e6eef0;--mut:#8aa3a8;--silver:#dfe9ec;--aqua:#7fd6cf;--line:#16343a;--card:#0a1e22;--disp:"Italiana",Georgia,serif;background:var(--bg);color:var(--ink)}
+#moon nav .cap{display:flex;justify-content:space-between;align-items:center;padding-block:22px;gap:16px;flex-wrap:wrap}
+#moon nav .logo{font-family:var(--disp);font-size:1.6rem;letter-spacing:.06em}
+#moon nav .links{display:flex;gap:20px;flex-wrap:wrap}
+#moon nav .links a{color:var(--mut);text-decoration:none;font-size:.85rem}
+#moon .hero{position:relative;overflow:hidden;padding-block:40px 80px}
+#moon .hero .cap{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:center}
+@media (max-width:820px){#moon .hero .cap{grid-template-columns:minmax(0,1fr)}}
+#moon .moonwrap{position:relative;display:grid;place-items:center}
+#moon canvas.moonc{width:min(100%,440px);aspect-ratio:1;max-width:100%}
+#moon .eyebrow{color:var(--aqua)}
+#moon h1{font-family:var(--disp);font-weight:400;font-size:clamp(3rem,8vw,5.6rem);line-height:1;margin:10px 0}
+#moon .facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin:22px 0}
+#moon .facts div{background:var(--bg);padding:14px 16px;display:grid}
+#moon .facts .k{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mut)}
+#moon .facts .v{font-size:1.15rem;font-weight:400}
+#moon .ghost{color:var(--silver)}
+#moon section.s{padding-block:76px;border-top:1px solid var(--line)}
+#moon h2{font-family:var(--disp);font-weight:400;font-size:clamp(2.2rem,5vw,3.4rem);margin:6px 0 12px;line-height:1.05}
+#moon .lead{color:var(--mut);max-width:60ch}
+#moon .ribbon .day{width:92px;border:1px solid var(--line);background:var(--card);padding:14px 8px;display:grid;justify-items:center;gap:6px;text-align:center}
+#moon .ribbon .day.poya{border-color:var(--aqua)}
+#moon .ribbon .day b{font-weight:400;font-size:.95rem}
+#moon .ribbon .day span{font-size:.72rem;color:var(--mut);line-height:1.3}
+#moon .ribbon canvas{width:40px;height:40px}
+#moon .poyabar{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-top:18px;color:var(--aqua)}
+#moon .arc{position:relative;height:300px;max-width:900px;margin:30px auto 0}
+#moon .arc svg{width:100%;height:100%;overflow:visible}
+#moon .arc .node circle{fill:var(--card);stroke:var(--line)}
+#moon .arc .node text{fill:var(--silver);font-family:"Gilda Display",Georgia,serif}
+#moon .arc .node .nm{fill:var(--mut);font-family:var(--body);font-size:11px;letter-spacing:.12em}
+#moon .arc .node.sel circle{stroke:var(--aqua);fill:#0f2c31}
+#moon .formbox{max-width:760px;margin:0 auto;text-align:center;display:grid;gap:18px;justify-items:center}
+#moon .form{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;width:100%;text-align:left}
+@media (max-width:640px){#moon .form{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+#moon footer{border-top:1px solid var(--line);padding-block:30px;color:var(--mut);font-size:.85rem}
+
+/* ---------- C · Temple night ---------- */
+#temple{--bg:#090d1f;--ink:#f3eee2;--mut:#a4a6bd;--gold:#dcaa4c;--verm:#d9573a;--line:#262d52;--card:#0e1430;--disp:"Cinzel","Trajan Pro",Georgia,serif;background:var(--bg);color:var(--ink)}
+#temple nav{border-bottom:1px solid #dcaa4c33}
+#temple nav .cap{display:flex;align-items:center;gap:22px;padding-block:18px;flex-wrap:wrap}
+#temple nav .logo{font-family:var(--disp);font-weight:600;letter-spacing:.24em;margin-right:auto;color:var(--gold)}
+#temple nav a{color:var(--ink);text-decoration:none;font-size:.85rem}
+#temple .hero{position:relative;overflow:hidden;text-align:center;padding-block:70px 90px}
+#temple .hero .cap{position:relative;display:grid;justify-items:center;gap:18px}
+#temple .kd{width:min(78vw,380px);aspect-ratio:1;max-width:100%}
+#temple .kd svg{width:100%;height:100%;filter:drop-shadow(0 0 18px #dcaa4c55)}
+#temple .eyebrow{color:var(--gold)}
+#temple h1{font-family:var(--disp);font-weight:400;font-size:clamp(2.2rem,6vw,4.2rem);line-height:1.1;margin:0;max-width:18ch;text-wrap:balance}
+#temple .sub{max-width:52ch;color:#d7d4c8;font-size:1.1rem}
+#temple .btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+#temple .solid{display:inline-block;font:inherit;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;font-weight:500;background:var(--gold);color:var(--bg);border:1px solid var(--gold);padding:12px 22px;text-decoration:none}
+#temple .hero .ghost{color:var(--gold)}
+#temple section.s{padding-block:76px}
+#temple h2{font-family:var(--disp);font-weight:400;font-size:clamp(1.7rem,4vw,2.6rem);margin:8px 0 14px;text-wrap:balance}
+#temple .center{text-align:center;display:grid;justify-items:center}
+#temple .lead{color:var(--mut);max-width:60ch}
+#temple .svc{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:1px;background:#dcaa4c33;border:1px solid #dcaa4c33;margin-top:30px}
+#temple .svc div{background:var(--bg);padding:28px 22px;display:grid;gap:10px;align-content:start}
+#temple .svc svg{width:38px;height:38px;stroke:var(--gold);fill:none;stroke-width:1.4}
+#temple .svc h3{font-family:var(--disp);font-weight:400;font-size:1.15rem;margin:0}
+#temple .svc p{color:var(--mut);margin:0;font-size:.95rem}
+#temple .svc a{color:var(--gold);font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;text-decoration:none}
+#temple .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:28px;margin-top:30px;counter-reset:st}
+#temple .steps div{display:grid;gap:8px;border-top:1px solid var(--gold);padding-top:16px}
+#temple .steps div::before{counter-increment:st;content:counter(st,upper-roman);font-family:var(--disp);color:var(--gold);font-size:1.4rem}
+#temple .steps p{margin:0;color:var(--mut)}
+#temple .sample{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:40px;align-items:center}
+@media (max-width:820px){#temple .sample{grid-template-columns:minmax(0,1fr)}}
+#temple .paper{background:var(--card);border:1px solid var(--line);padding:26px;display:grid;gap:12px}
+#temple .paper .chips{display:flex;gap:8px;flex-wrap:wrap}
+#temple .paper .chips span{font-size:.78rem;border:1px solid var(--line);padding:3px 10px;border-radius:999px}
+#temple .paper .ok{color:#7fd6a6;border-color:#7fd6a655!important}#temple .paper .wa{color:#f0c06a;border-color:#f0c06a55!important}
+#temple .paper h3{font-family:var(--disp);font-weight:400;margin:0;font-size:1.25rem}
+#temple .paper p{margin:0;color:#d7d4c8}
+#temple .lagnas{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:10px;margin-top:26px}
+#temple .lagnas a{border:1px solid var(--line);padding:14px;text-decoration:none;color:var(--ink);display:grid;gap:2px}
+#temple .lagnas a b{font-family:var(--disp);font-weight:400}
+#temple .lagnas a span{font-size:.8rem;color:var(--mut)}
+#temple footer{border-top:1px solid #dcaa4c33;padding-block:30px;color:var(--mut);font-size:.85rem}
+</style>
+
+<div class="switch"><div class="in"><b>Homepage mockup</b>
+ <button data-v="cosmos" aria-pressed="true">A · Cosmos</button><button data-v="moon" aria-pressed="false">B · Moonlight</button><button data-v="temple" aria-pressed="false">C · Temple night</button>
+ <span class="desc" id="desc"></span></div></div>
+
+<!-- A -->
+<div class="mock" id="cosmos"><div class="label g"><div class="cap"><b>A · Cosmos</b><span>Closest to the reference: space opening, rashi cards, chart teaser, today's panchanga, guides.</span></div></div>
+ <header class="hero">
+  <canvas class="stars" data-c="#ffffff"></canvas><div class="glow"></div><div class="orbit"></div>
+  <div class="planet p1 drift"></div><div class="planet p2"></div><div class="planet p3"></div>
+  <nav class="g"><div class="cap"><a class="logo" href="#cosmos"><svg width="30" height="30" viewBox="0 0 40 40" aria-hidden="true"><rect x="3" y="3" width="34" height="34" fill="none" stroke="#f1eef9"/><path d="M20 3L37 20L20 37L3 20Z M3 3L37 37M37 3L3 37" fill="none" stroke="#f1eef9" stroke-width=".8"/></svg>Graha Kendra</a>
+   <a href="#cosmos">Readings</a><a href="#cosmos">Palapala</a><a href="#cosmos">Porondam</a><a href="#cosmos">Nakath</a><a href="#cosmos">Learn</a><a class="ghost" href="#cosmos">Get my reading</a></div></nav>
+  <div class="txt g"><span class="eyebrow" style="color:var(--rose)">Vedic astrology · Sri Lanka</span><h1>Graha<br>Kendra</h1>
+   <p class="sub">Your birth chart, read in plain words. Who you are, what's coming, and when to act.</p>
+   <a class="ghost" href="#cosmos">Begin your reading</a><span class="more">Discover more<span>↓</span></span></div>
+ </header>
+ <section class="s g"><div class="cap center"><span class="eyebrow">By your Moon sign</span><h2>This month's palapala</h2><p class="lead">Every month, guidance for each rashi: what the planets bring, where to be careful, and the best days to act.</p></div>
+  <div class="cap hscroll" id="rashiA" style="margin-top:32px"></div></section>
+ <section class="s g"><div class="cap split"><div><span class="eyebrow">Your kendaraya</span><h2>The chart you were born under, explained</h2><p class="lead">Enter your birth date, time and place. We cast your chart with the Lahiri ayanamsa and read it the classical way, in language anyone can follow.</p>
+   <div class="form"><label class="fl">Birth date<input id="a-d" type="date" value="1990-08-15"></label><label class="fl">Birth time<input id="a-t" type="time" value="10:30"></label><label class="fl">Birth place<select id="a-p"><option>Colombo</option><option>Kandy</option><option>Galle</option></select></label></div>
+   <a class="ghost" href="#cosmos" style="color:var(--rose)">Read my chart</a></div>
+  <div class="chartart"><svg viewBox="0 0 400 400" aria-label="Kendaraya chart illustration"><g fill="none" stroke="#c7b6ff" stroke-width="1.2"><path d="M2 2H398V398H2Z"/><line x1="2" y1="2" x2="398" y2="398"/><line x1="398" y1="2" x2="2" y2="398"/><path d="M200 2L398 200L200 398L2 200Z"/></g>
+   <g fill="#f1eef9" font-family="Gilda Display,Georgia" font-size="17" text-anchor="middle"><text x="200" y="100" fill="#f3a9cb">Lagna</text><text x="200" y="122">Ju</text><text x="300" y="205">Su Ve</text><text x="100" y="205">Ke</text><text x="200" y="305">Ma</text><text x="36" y="104">Sa</text><text x="364" y="104">Me</text><text x="300" y="365">Mo</text><text x="100" y="40">Ra</text></g></svg></div></div></section>
+ <section class="s g" style="padding-top:20px"><div class="cap"><span class="eyebrow">Today in the sky · Colombo</span><h2 style="margin-bottom:26px">Today's panchanga</h2><div class="today" id="todayA"></div></div></section>
+ <section class="s g"><div class="cap"><div style="display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:28px"><div><span class="eyebrow">Learn</span><h2 style="margin-bottom:0">Guides to your chart</h2></div><a class="ghost" href="#cosmos" style="color:var(--ink)">Read all</a></div>
+  <div class="arts"><div class="art"><div class="img"></div><span class="eyebrow" style="font-size:.7rem">Transits</span><h3>Sade Sati, without the fear</h3><small>7 min read</small></div><div class="art"><div class="img"></div><span class="eyebrow" style="font-size:.7rem">Basics</span><h3>Your lagna: the sign rising when you were born</h3><small>5 min read</small></div><div class="art"><div class="img"></div><span class="eyebrow" style="font-size:.7rem">Marriage</span><h3>Porondam, explained point by point</h3><small>9 min read</small></div></div></div></section>
+ <section class="s g"><div class="cap cta"><span class="eyebrow">Your full palapala</span><h2>A complete reading of your life</h2><p class="lead">Nature, career, money, marriage, health, your life periods and the best dates ahead, in one book you can keep.</p><a class="ghost" href="#cosmos" style="color:var(--rose)">Create my palapala</a></div></section>
+ <footer class="g"><div class="cap" style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap"><span>Graha Kendra · Vedic astrology in plain words</span><span>Readings · Palapala · Porondam · Nakath · Learn</span></div></footer>
+</div>
+
+<!-- B -->
+<div class="mock" id="moon"><div class="label g"><div class="cap"><b>B · Moonlight</b><span>Built around tonight's real Moon: live phase and tithi, a lunar calendar with Poya days, Moon signs.</span></div></div>
+ <nav class="g"><div class="cap"><span class="logo">Graha Kendra</span><div class="links"><a href="#moon">Tonight</a><a href="#moon">Poya calendar</a><a href="#moon">Moon signs</a><a href="#moon">My reading</a></div></div></nav>
+ <header class="hero g"><canvas class="stars" data-c="#cfe9ec"></canvas><div class="cap">
+  <div class="moonwrap"><canvas class="moonc" id="moonBig" width="880" height="880" aria-label="Tonight's moon phase"></canvas></div>
+  <div><span class="eyebrow">Tonight's moon · Colombo</span><h1 id="b-tithi">—</h1><p class="lead" id="b-line" style="font-size:1.1rem"></p>
+   <div class="facts" id="b-facts"></div><a class="ghost" href="#moon">What tonight means for me</a></div></div></header>
+ <section class="s g"><div class="cap"><span class="eyebrow">The next two weeks</span><h2>Lunar days ahead</h2><p class="lead">Each lunar day (tithi) has its own character. Poya days are marked.</p>
+  <div class="hscroll ribbon" id="ribbon" style="margin-top:26px"></div><div class="poyabar" id="poyabar"></div></div></section>
+ <section class="s g"><div class="cap" style="text-align:center"><span class="eyebrow">Moon signs</span><h2>Which rashi was your Moon in?</h2><p class="lead" style="margin:0 auto">In Vedic astrology your Moon sign shapes your mind and your monthly forecast. Choose yours.</p>
+  <div class="arc" id="arc"></div></div></section>
+ <section class="s g"><div class="formbox"><span class="eyebrow">Your birth moment</span><h2>See your own moon</h2><p class="lead">The Moon's position when you were born sets your birth star and every life period that follows.</p>
+  <div class="form"><label class="fl">Name<input id="b-n" value="Nimal"></label><label class="fl">Date<input id="b-d" type="date" value="1990-08-15"></label><label class="fl">Time<input id="b-t" type="time" value="10:30"></label><label class="fl">Place<select id="b-p"><option>Colombo</option><option>Kandy</option></select></label></div>
+  <a class="ghost" href="#moon" style="color:var(--aqua)">Show my birth moon</a></div></section>
+ <footer class="g"><div class="cap" style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap"><span>Graha Kendra</span><span>Moon data for Colombo, computed live</span></div></footer>
+</div>
+
+<!-- C -->
+<div class="mock" id="temple"><div class="label g"><div class="cap"><b>C · Temple night</b><span>Midnight blue and gold: a glowing kendaraya, four services, how it works, and a sample reading.</span></div></div>
+ <nav class="g"><div class="cap"><span class="logo">GRAHA KENDRA</span><a href="#temple">Kendaraya</a><a href="#temple">Porondam</a><a href="#temple">Nakath</a><a href="#temple">Palapala</a><a href="#temple" style="color:var(--gold)">Sign in</a></div></nav>
+ <header class="hero g"><canvas class="stars" data-c="#f3dfb0"></canvas><div class="cap">
+  <div class="kd"><svg viewBox="0 0 400 400" aria-hidden="true"><g fill="none" stroke="#dcaa4c" stroke-width="1.5"><path d="M4 4H396V396H4Z"/><line x1="4" y1="4" x2="396" y2="396"/><line x1="396" y1="4" x2="4" y2="396"/><path d="M200 4L396 200L200 396L4 200Z"/></g><g fill="#dcaa4c"><circle cx="200" cy="100" r="5"/><circle cx="300" cy="200" r="3.5"/><circle cx="100" cy="200" r="3.5"/><circle cx="200" cy="300" r="3.5"/></g></svg></div>
+  <span class="eyebrow">Vedic astrology for Sri Lanka</span><h1>Your kendaraya, finally explained</h1>
+  <p class="sub">Every family keeps a horoscope. Few can read it. Enter your birth details and see what yours says about you, your path, and the years ahead, in plain words.</p>
+  <div class="btns"><a class="solid" href="#temple">Read my chart</a><a class="ghost" href="#temple">Check porondam</a></div></div></header>
+ <section class="s g"><div class="cap center"><span class="eyebrow">What you can do here</span><h2>Four services, one chart</h2></div>
+  <div class="cap svc">
+   <div><svg viewBox="0 0 40 40"><path d="M3 3H37V37H3Z M3 3L37 37M37 3L3 37M20 3L37 20L20 37L3 20Z"/></svg><h3>Birth chart reading</h3><p>Your nature, career, money, marriage and health, read from your lagna and planets.</p><a href="#temple">Open</a></div>
+   <div><svg viewBox="0 0 40 40"><circle cx="15" cy="20" r="10"/><circle cx="25" cy="20" r="10"/></svg><h3>Porondam matching</h3><p>Check compatibility between two horoscopes, point by point, with a clear verdict.</p><a href="#temple">Open</a></div>
+   <div><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="15"/><path d="M20 10V20L27 24"/></svg><h3>Nakath and good times</h3><p>Auspicious times for weddings, house-warming, travel and new work, for your city.</p><a href="#temple">Open</a></div>
+   <div><svg viewBox="0 0 40 40"><path d="M8 5H28L33 10V35H8Z M28 5V10H33 M13 16H28M13 22H28M13 28H22"/></svg><h3>Yearly palapala</h3><p>A month-by-month forecast for the year ahead from your own chart and dasha.</p><a href="#temple">Open</a></div></div></section>
+ <section class="s g"><div class="cap center"><span class="eyebrow">How it works</span><h2>From birth time to clear answers</h2></div>
+  <div class="cap steps"><div><h3 style="font-family:var(--disp);font-weight:400;margin:0">Enter your birth moment</h3><p>Date, time and place of birth. Sri Lankan time-zone changes from 1996 to 2006 are handled for you.</p></div><div><h3 style="font-family:var(--disp);font-weight:400;margin:0">We cast your chart</h3><p>Planet positions are calculated precisely with the Lahiri ayanamsa used by Sri Lankan astrologers.</p></div><div><h3 style="font-family:var(--disp);font-weight:400;margin:0">Read it in plain words</h3><p>Each part of life explained simply, with the dates when things are most likely to happen.</p></div></div></section>
+ <section class="s g"><div class="cap sample"><div><span class="eyebrow">A sample reading</span><h2>This is what you'll receive</h2><p class="lead">No jargon walls. Every section says what it means for you, when, and what to do.</p></div>
+  <div class="paper"><div class="chips"><span>Tula lagna</span><span>Moon in Vrishabha</span><span>Rohini nakshatra</span></div>
+   <h3>Career · now to June 2029</h3><p>You're in a strong career phase. Jupiter sits in your career house and is exalted, which brings respected roles in teaching, law, finance or management.</p>
+   <div class="chips"><span class="ok">Good for promotions</span><span class="ok">Good for study</span><span class="wa">Careful with loans in 2030</span></div>
+   <h3>Marriage</h3><p>Most likely between July and November 2027, when your dasha and the Jupiter–Saturn transits both point to your 7th house.</p></div></div></section>
+ <section class="s g"><div class="cap center"><span class="eyebrow">Monthly forecast by lagna</span><h2>November palapala</h2></div><div class="cap lagnas" id="lagnas"></div></section>
+ <footer class="g"><div class="cap" style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap"><span style="font-family:var(--disp);color:var(--gold);letter-spacing:.2em">GRAHA KENDRA</span><span>Kendaraya · Porondam · Nakath · Palapala</span></div></footer>
+</div>
+
+<script src="core.js"></script>
+<script>
+const DESC={cosmos:'A · Cosmos: closest to the reference. Immersive space hero, big serif title, rashi cards row, chart teaser with a form, today\'s panchanga, guides and a palapala call to action.',
+ moon:'B · Moonlight: built around tonight\'s real Moon. Live phase, tithi and nakath for Colombo, a two-week lunar ribbon with Poya days, and an arc of Moon signs.',
+ temple:'C · Temple night: the same cosmic mood in midnight blue and temple gold, with a glowing kendaraya as the hero, four clear services, a how-it-works strip and a sample reading.'};
+const GLYPH=['♈','♉','♊','♋','♌','♍','♎','♏','♐','♑','♒','♓'].map(g=>g+'︎');
+function stars(cv){const r=cv.getBoundingClientRect(),d=Math.min(2,devicePixelRatio||1);cv.width=r.width*d;cv.height=r.height*d;const c=cv.getContext('2d');c.scale(d,d);let s=7;const rnd=()=>(s=(s*16807)%2147483647)/2147483647;
+ const col=cv.dataset.c;for(let i=0;i<Math.round(r.width*r.height/1800);i++){c.globalAlpha=0.2+rnd()*0.8;c.fillStyle=col;const z=rnd()<0.93?0.7:1.5;c.beginPath();c.arc(rnd()*r.width,rnd()*r.height,z,0,7);c.fill()}}
+function drawMoon(cv,elong,big){const c=cv.getContext('2d'),W=cv.width,R=W*0.42,cx=W/2,cy=W/2;c.clearRect(0,0,W,W);
+ if(big){const g=c.createRadialGradient(cx,cy,R*0.9,cx,cy,R*1.35);g.addColorStop(0,'rgba(200,235,240,.18)');g.addColorStop(1,'rgba(200,235,240,0)');c.fillStyle=g;c.fillRect(0,0,W,W)}
+ c.fillStyle='#16282c';c.beginPath();c.arc(cx,cy,R,0,7);c.fill();
+ const k=Math.cos(elong*Math.PI/180),waxing=elong<180;c.save();c.beginPath();c.arc(cx,cy,R,0,7);c.clip();
+ const lit=big?(()=>{const g=c.createRadialGradient(cx-R*0.3,cy-R*0.3,R*0.1,cx,cy,R);g.addColorStop(0,'#f4f8f6');g.addColorStop(1,'#bfcfcc');return g})():'#dfe9ec';
+ c.fillStyle=lit;c.beginPath();c.arc(cx,cy,R,-Math.PI/2,Math.PI/2,!waxing);c.closePath();c.fill();
+ c.fillStyle=k>0?'#16282c':lit;c.beginPath();c.ellipse(cx,cy,Math.abs(k)*R,R,0,0,7);c.fill();
+ if(big){let s=3;const rnd=()=>(s=(s*16807)%2147483647)/2147483647;c.globalAlpha=.10;c.fillStyle='#0a1416';for(let i=0;i<26;i++){c.beginPath();c.arc(cx+(rnd()-.5)*R*1.6,cy+(rnd()-.5)*R*1.6,R*(0.03+rnd()*0.1),0,7);c.fill()}}
+ c.restore();c.strokeStyle=big?'rgba(223,233,236,.45)':'rgba(223,233,236,.35)';c.lineWidth=big?3:2;c.beginPath();c.arc(cx,cy,R,0,7);c.stroke()}
+const now=Date.now(),jd=now/864e5+2440587.5,TZ=5.5,LAT=6.9271,LON=79.8612;
+const tp=tropical(jd),sp=siderealAll(jd),elong=norm(tp.Mo-tp.Su),ti=Math.floor(elong/12),nk=nakOf(sp.Mo),yi=Math.floor(norm(sp.Su+sp.Mo)/(360/27));
+const tname=i=>i===14?'Purnima':i===29?'Amavasya':TITHI[i%15],paksha=i=>i<15?'Shukla':'Krishna';
+const loc=new Date(now+TZ*36e5),ev=sunEvents(loc.getUTCFullYear(),loc.getUTCMonth()+1,loc.getUTCDate(),LAT,LON,TZ),wd=loc.getUTCDay();
+let rk='—';if(ev){const p=(ev.set-ev.rise)/8,k=[7,1,6,4,5,3,2][wd];rk=`${fmtHr(ev.rise+p*k)}–${fmtHr(ev.rise+p*(k+1))}`}
+const lit=Math.round((1-Math.cos(elong*Math.PI/180))/2*100);
+/* A */
+document.getElementById('rashiA').innerHTML=SIGNS.map((s,i)=>`<div class="rcard"><span class="gl">${GLYPH[i]}</span><b>${s[0]}</b><span>${s[1]}</span><a class="ghost" href="#cosmos">Explore</a></div>`).join('');
+document.getElementById('todayA').innerHTML=[['Tithi',`${paksha(ti)} ${tname(ti)}`],['Nakshatra',nk.name],['Yoga',YOGA[yi]],['Sunrise',ev?fmtHr(ev.rise):'—'],['Rahu kalaya',rk]].map(([k,v])=>`<div><span class="k">${k}</span><span class="v">${v}</span></div>`).join('');
+/* B */
+document.getElementById('b-tithi').textContent=`${paksha(ti)} ${tname(ti)}`;
+document.getElementById('b-line').textContent=`The Moon is ${elong<180?'growing':'shrinking'}, ${lit}% lit, passing through ${nk.name} in ${SIGNS[signOf(sp.Mo)][0]} (${SIGNS[signOf(sp.Mo)][1]}).`;
+document.getElementById('b-facts').innerHTML=[['Sunrise',ev?fmtHr(ev.rise):'—'],['Sunset',ev?fmtHr(ev.set):'—'],['Rahu kalaya',rk],['Yoga',YOGA[yi]]].map(([k,v])=>`<div><span class="k">${k}</span><span class="v">${v}</span></div>`).join('');
+const POYA=['Duruthu','Navam','Medin','Bak','Vesak','Poson','Esala','Nikini','Binara','Vap','Il','Unduvap'];
+let rib='',nextPoya=null;for(let d=0;d<14;d++){const j=jd+d,t=tropical(j),e=norm(t.Mo-t.Su),i=Math.floor(e/12),dt=new Date(now+TZ*36e5+d*864e5),poya=i===14;
+ if(poya&&!nextPoya)nextPoya=dt;rib+=`<div class="day${poya?' poya':''}"><canvas width="80" height="80" data-e="${e}"></canvas><b>${d===0?'Today':dt.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',timeZone:'UTC'})}</b><span>${tname(i)}${poya?'<br>Poya':''}</span></div>`}
+document.getElementById('ribbon').innerHTML=rib;
+if(!nextPoya){for(let d=14;d<31;d++){const t=tropical(jd+d);if(Math.floor(norm(t.Mo-t.Su)/12)===14){nextPoya=new Date(now+TZ*36e5+d*864e5);break}}}
+document.getElementById('poyabar').innerHTML=nextPoya?`<span class="eyebrow">Next Poya</span><span style="font-size:1.2rem">${POYA[nextPoya.getUTCMonth()]} Full Moon Poya · ${nextPoya.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',timeZone:'UTC'})}</span>`:'';
+let arc='<svg viewBox="0 0 900 300" role="img" aria-label="Moon signs">';arc+='<path d="M30 270 Q450 -90 870 270" fill="none" stroke="#16343a"/>';
+for(let i=0;i<12;i++){const t=i/11,x=(1-t)**2*30+2*(1-t)*t*450+t*t*870,y=(1-t)**2*270+2*(1-t)*t*(-90)+t*t*270,sel=i===signOf(sp.Mo);
+ arc+=`<g class="node${sel?' sel':''}"><circle cx="${x}" cy="${y}" r="30"/><text x="${x}" y="${y+9}" text-anchor="middle" font-size="26">${GLYPH[i]}</text><text class="nm" x="${x}" y="${y+50}" text-anchor="middle">${SIGNS[i][0].toUpperCase()}</text></g>`}
+document.getElementById('arc').innerHTML=arc+'</svg>';
+/* C */
+document.getElementById('lagnas').innerHTML=SIGNS.map((s,i)=>`<a href="#temple"><b>${s[0]}</b><span>${s[1]} lagna</span></a>`).join('');
+/* switching */
+function mark(v){if(!DESC[v])return;document.querySelectorAll('.switch button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.v===v));document.getElementById('desc').textContent='All three designs are on this page. Scroll down, or jump to one.'}
+function paint(){document.querySelectorAll('canvas.stars').forEach(stars);drawMoon(document.getElementById('moonBig'),elong,true);document.querySelectorAll('#ribbon canvas').forEach(c=>drawMoon(c,+c.dataset.e,false))}
+document.querySelector('.switch').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;mark(b.dataset.v);document.getElementById(b.dataset.v).scrollIntoView({behavior:'smooth'})});
+const io=new IntersectionObserver(es=>{for(const e of es)if(e.isIntersecting)mark(e.target.id)},{rootMargin:'-45% 0px -50% 0px'});document.querySelectorAll('.mock').forEach(m=>io.observe(m));
+addEventListener('resize',()=>document.querySelectorAll('canvas.stars').forEach(stars));
+mark('cosmos');requestAnimationFrame(paint);
+</script>

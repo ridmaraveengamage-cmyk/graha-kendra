@@ -1,0 +1,317 @@
+<title>Graha Kendra</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: deep-space single theme by design. Rendered planet hero, a rail of rashi cards, a bento grid of tools, a reading form, guides, closing call to action. */
+:root{
+ --bg:#05040b;--bg2:#0a0816;--ink:#f5f3fc;--ink2:#c9c4dc;--mut:#8e88a8;--line:rgba(255,255,255,.09);--line2:rgba(255,255,255,.16);
+ --glass:rgba(255,255,255,.035);--glass2:rgba(255,255,255,.06);
+ --lilac:#b7a6ff;--rose:#ff9fc8;--gold:#f6c97e;--teal:#7fe0d2;
+ --serif:"Instrument Serif","Iowan Old Style",Georgia,serif;--sans:"Geist","Segoe UI",system-ui,sans-serif;--mono:"Geist Mono",ui-monospace,Consolas,monospace;
+ color-scheme:dark}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--sans);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:70;opacity:.06;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+a{color:inherit}
+.g{padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.cap{max-width:1200px;margin:0 auto}
+:focus-visible{outline:2px solid var(--lilac);outline-offset:3px;border-radius:8px}
+.serif{font-family:var(--serif);font-weight:400}
+em{font-style:italic;font-family:var(--serif)}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--lilac)}
+.btn{display:inline-flex;align-items:center;gap:10px;height:48px;padding:0 22px;border-radius:999px;font:500 15px var(--sans);text-decoration:none;cursor:pointer;border:1px solid transparent;transition:transform .2s,background .2s,border-color .2s}
+.btn.primary{background:var(--ink);color:#0b0914}
+.btn.primary:hover{transform:translateY(-1px);background:#fff}
+.btn.glass{background:var(--glass2);color:var(--ink);border-color:var(--line2);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.btn.glass:hover{border-color:rgba(255,255,255,.3)}
+.btn svg{width:16px;height:16px}
+
+/* nav */
+.nav{position:fixed;top:calc(14px + env(safe-area-inset-top,0px));left:0;right:0;z-index:50}
+.nav .bar{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:6px;height:60px;padding:0 8px 0 18px;border-radius:999px;background:rgba(12,10,24,.55);border:1px solid var(--line);-webkit-backdrop-filter:blur(18px) saturate(140%);backdrop-filter:blur(18px) saturate(140%)}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font:500 15px var(--sans);letter-spacing:.01em;margin-right:auto}
+.logo svg{width:26px;height:26px}
+.nav .links{display:flex;gap:2px}
+.nav .links a{font:500 14px var(--sans);color:var(--ink2);text-decoration:none;padding:8px 14px;border-radius:999px}
+.nav .links a:hover{color:var(--ink);background:var(--glass2)}
+.nav .btn{height:44px;padding:0 18px;font-size:14px}
+@media (max-width:860px){.nav .links{display:none}}
+
+/* hero */
+.hero{position:relative;min-height:clamp(640px,100svh,940px);display:grid;align-items:center;overflow:hidden;isolation:isolate}
+#sky{position:absolute;inset:0;width:100%;height:100%;z-index:-2;display:block}
+.hero .fallback{position:absolute;inset:0;z-index:-3;background:radial-gradient(60% 70% at 85% 10%,#3b2d7a 0,#1a1438 40%,transparent 70%),radial-gradient(40% 40% at 20% 30%,#3a1b4a88,transparent 70%),var(--bg)}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(5,4,11,.72) 0%,rgba(5,4,11,.35) 45%,transparent 70%)}
+@media (max-width:700px){.hero::before{background:linear-gradient(180deg,transparent 0%,rgba(5,4,11,.55) 35%,rgba(5,4,11,.7) 100%)}}
+.hero::after{content:"";position:absolute;inset:auto 0 0;height:220px;z-index:-1;background:linear-gradient(to bottom,transparent,var(--bg))}
+.hero .cap{width:100%;padding-top:120px;padding-bottom:90px;display:grid;gap:26px;justify-items:start}
+.chip{display:inline-flex;align-items:center;gap:10px;height:34px;padding:0 14px 0 10px;border-radius:999px;background:rgba(12,10,24,.5);border:1px solid var(--line2);font:500 13px var(--sans);color:var(--ink2);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.chip .dot{width:8px;height:8px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 4px rgba(127,224,210,.15)}
+.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(3.4rem,9vw,7.6rem);line-height:.92;letter-spacing:-.02em;margin:0;max-width:11ch;text-wrap:balance}
+.hero h1 em{color:var(--lilac)}
+.hero .sub{font-size:clamp(1.05rem,1.6vw,1.25rem);color:var(--ink2);max-width:46ch;margin:0;line-height:1.55}
+.hero .ctas{display:flex;gap:12px;flex-wrap:wrap}
+.proof{display:flex;gap:22px;flex-wrap:wrap;font:400 13px var(--mono);color:var(--mut);margin-top:10px}
+.proof span{display:flex;align-items:center;gap:8px}.proof span::before{content:"";width:4px;height:4px;border-radius:50%;background:var(--lilac)}
+@media (prefers-reduced-motion:no-preference){.hero .cap>*{animation:rise .9s cubic-bezier(.2,.7,.2,1) both}.hero .cap>*:nth-child(2){animation-delay:.08s}.hero .cap>*:nth-child(3){animation-delay:.16s}.hero .cap>*:nth-child(4){animation-delay:.24s}.hero .cap>*:nth-child(5){animation-delay:.32s}
+ @keyframes rise{from{opacity:.0;transform:translateY(14px)}to{opacity:1;transform:none}}}
+
+/* sections */
+section[id]{scroll-margin-top:calc(90px + env(safe-area-inset-top,0px))}
+html{scroll-behavior:smooth}
+section.s{padding-block:clamp(72px,10vw,128px)}
+.head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:40px}
+.head h2{font-family:var(--serif);font-weight:400;font-size:clamp(2.4rem,5vw,4rem);line-height:1;letter-spacing:-.015em;margin:14px 0 0;max-width:16ch;text-wrap:balance}
+.head p{color:var(--ink2);max-width:42ch;margin:0}
+
+/* rashi rail */
+.rail{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:14px;scrollbar-width:thin;scrollbar-color:#2a2540 transparent}
+.rcard{flex:none;width:236px;scroll-snap-align:start;border-radius:22px;padding:22px;background:linear-gradient(180deg,var(--glass2),var(--glass));border:1px solid var(--line);display:grid;gap:4px;text-decoration:none;transition:border-color .25s,transform .25s}
+.rcard:hover{border-color:var(--line2);transform:translateY(-3px)}
+.orb{width:64px;height:64px;border-radius:50%;margin-bottom:18px;box-shadow:inset -10px -12px 22px rgba(0,0,0,.55),0 0 34px -6px var(--glow)}
+.rcard .n{font-family:var(--serif);font-size:2rem;line-height:1.05}
+.rcard .e{color:var(--ink2);font-size:14px}
+.rcard .meta{display:flex;justify-content:space-between;margin-top:18px;padding-top:14px;border-top:1px solid var(--line);font:400 12px var(--mono);color:var(--mut)}
+.rcard .meta b{font-weight:500;color:var(--ink)}
+
+/* bento */
+.bento{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:minmax(220px,auto);gap:14px}
+.tile{border-radius:24px;background:linear-gradient(180deg,var(--glass2),var(--glass));border:1px solid var(--line);padding:24px;display:flex;flex-direction:column;gap:12px;position:relative;overflow:hidden;min-width:0}
+.tile h3{font:500 17px var(--sans);margin:0}
+.tile p{margin:0;color:var(--ink2);font-size:14.5px}
+.tile .tag{font:500 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--mut)}
+.t-chart{grid-column:span 2;grid-row:span 2}
+.t-today{grid-column:span 2}
+.t-dasha{grid-column:span 2}
+.t-por,.t-nak{grid-column:span 1}
+@media (max-width:980px){.bento{grid-template-columns:repeat(2,minmax(0,1fr))}.t-chart,.t-today,.t-dasha{grid-column:span 2}.t-chart{grid-row:span 1}}
+@media (max-width:560px){.bento{grid-template-columns:minmax(0,1fr)}.t-chart,.t-today,.t-dasha,.t-por,.t-nak{grid-column:span 1}}
+.t-chart svg{width:100%;max-width:440px;margin:auto;display:block}
+.kd .ln{fill:none;stroke:url(#kg);stroke-width:1.3}
+.kd .lag{fill:rgba(183,166,255,.08)}
+.kd text{font:500 14px var(--mono);fill:var(--ink)}
+.kd .sn{font-size:10.5px;fill:var(--mut)}
+.kd .asc{fill:var(--rose)}
+.tile .row{display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap;margin-top:auto}
+.today{display:grid;grid-template-columns:auto minmax(0,1fr);gap:22px;align-items:center}
+.today canvas{width:96px;height:96px}
+.kv{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 22px}
+.kv div{display:grid;gap:2px}.kv span{font:400 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}.kv b{font-weight:500;font-size:15px}
+.bars{display:grid;gap:10px;margin-top:6px}
+.bar{display:grid;grid-template-columns:78px minmax(0,1fr) auto;gap:12px;align-items:center;font:400 12px var(--mono);color:var(--mut)}
+.bar i{display:block;height:8px;border-radius:99px;background:linear-gradient(90deg,var(--c1),var(--c2))}
+.bar b{font-weight:500;color:var(--ink)}
+.ring{width:110px;height:110px;margin:4px auto}
+.nak{display:grid;gap:8px;font-size:14px}
+.nak div{display:flex;justify-content:space-between;gap:8px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.nak span{color:var(--mut);font-family:var(--mono);font-size:12.5px}
+
+/* reading */
+.reading{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center}
+@media (max-width:900px){.reading{grid-template-columns:minmax(0,1fr)}}
+.reading ul{list-style:none;margin:28px 0 0;padding:0;display:grid;gap:14px}
+.reading li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px;color:var(--ink2)}
+.reading li svg{width:22px;height:22px;color:var(--lilac);margin-top:2px}
+.reading li b{color:var(--ink);font-weight:500}
+.formcard{border-radius:28px;padding:30px;background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.025));border:1px solid var(--line2);box-shadow:0 40px 120px -40px rgba(120,90,255,.35);display:grid;gap:16px}
+.formcard h3{font-family:var(--serif);font-weight:400;font-size:2rem;margin:0}
+.fgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+@media (max-width:480px){.fgrid{grid-template-columns:minmax(0,1fr)}}
+.field{display:grid;gap:6px}.field.full{grid-column:1/-1}
+.field label{font:500 13px var(--sans);color:var(--ink2)}
+.field input,.field select{height:50px;border-radius:14px;border:1px solid var(--line2);background:rgba(5,4,11,.55);color:var(--ink);font:400 15px var(--sans);padding:0 14px;width:100%;min-width:0;color-scheme:dark}
+.field input:focus,.field select:focus{border-color:var(--lilac);outline:none;box-shadow:0 0 0 4px rgba(183,166,255,.15)}
+.formcard .btn{justify-content:center;width:100%;height:54px;font-size:16px}
+.fine{font-size:12.5px;color:var(--mut);text-align:center}
+
+/* guides */
+.guides{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+@media (max-width:900px){.guides{grid-template-columns:minmax(0,1fr)}}
+.guide{display:grid;gap:14px;text-decoration:none}
+.art{aspect-ratio:4/3;max-width:100%;border-radius:22px;border:1px solid var(--line);overflow:hidden;position:relative;background:#0c0a1a}
+.art::before,.art::after{content:"";position:absolute;border-radius:50%;filter:blur(30px)}
+.a1::before{width:70%;height:70%;left:-10%;top:-10%;background:#6c4bff}.a1::after{width:60%;height:60%;right:-15%;bottom:-20%;background:#ff7ab6}
+.a2::before{width:55%;height:55%;left:22%;top:20%;background:#2c2a70}.a2::after{width:30%;height:30%;left:35%;top:33%;background:#c8bbff;filter:blur(2px);box-shadow:0 0 80px 20px #8f7bff}
+.a3::before{width:70%;height:70%;right:-20%;top:-25%;background:#f6b860}.a3::after{width:60%;height:60%;left:-20%;bottom:-25%;background:#4b2a8f}
+.art span{position:absolute;left:16px;bottom:14px;z-index:1;font:500 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.35);padding:5px 10px;border-radius:999px;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.guide h3{font-family:var(--serif);font-weight:400;font-size:1.75rem;line-height:1.1;margin:0;text-wrap:balance}
+.guide p{margin:0;color:var(--mut);font-size:14px}
+
+/* closing */
+.closing{position:relative;border-radius:32px;overflow:hidden;padding:clamp(48px,8vw,96px) 24px;text-align:center;display:grid;justify-items:center;gap:18px;border:1px solid var(--line);background:radial-gradient(60% 90% at 50% 120%,rgba(143,123,255,.45),transparent 70%),radial-gradient(40% 60% at 85% -10%,rgba(255,159,200,.18),transparent 70%),var(--bg2)}
+.closing h2{font-family:var(--serif);font-weight:400;font-size:clamp(2.4rem,6vw,4.6rem);line-height:1;letter-spacing:-.015em;margin:0;max-width:14ch;text-wrap:balance}
+.closing p{color:var(--ink2);max-width:46ch;margin:0}
+footer{padding-block:56px 40px;color:var(--mut);font-size:14px}
+footer .cols{display:grid;grid-template-columns:2fr repeat(3,minmax(0,1fr));gap:28px;border-top:1px solid var(--line);padding-top:40px}
+@media (max-width:760px){footer .cols{grid-template-columns:repeat(2,minmax(0,1fr))}}
+footer h4{font:500 13px var(--sans);color:var(--ink);margin:0 0 12px}
+footer a{display:block;text-decoration:none;color:var(--mut);padding:3px 0}footer a:hover{color:var(--ink)}
+footer .legal{margin-top:36px;font-size:12.5px}
+</style>
+
+<nav class="nav g" aria-label="Main"><div class="bar">
+ <a class="logo" href="#top"><svg viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#b7a6ff"/><stop offset="1" stop-color="#ff9fc8"/></linearGradient></defs><rect x="2" y="2" width="28" height="28" rx="3" fill="none" stroke="url(#lg)" stroke-width="1.6"/><path d="M16 2L30 16L16 30L2 16Z M2 2L30 30M30 2L2 30" fill="none" stroke="url(#lg)" stroke-width="1"/><circle cx="16" cy="9" r="2.2" fill="#f5f3fc"/></svg>Graha Kendra</a>
+ <div class="links"><a href="#rashis">Horoscopes</a><a href="#tools">Tools</a><a href="#reading">Birth chart</a><a href="#guides">Learn</a></div>
+ <a class="btn primary" href="#reading">Get my reading</a></div></nav>
+
+<header class="hero" id="top"><div class="fallback"></div><canvas id="sky" aria-hidden="true"></canvas>
+ <div class="cap g">
+  <span class="chip"><span class="dot"></span><span id="liveChip">Tonight in Colombo</span></span>
+  <h1>Read the sky you were <em>born under</em></h1>
+  <p class="sub">Vedic astrology for Sri Lanka, explained in plain words. Your nature, your life periods, and the best times ahead, from one accurate birth chart.</p>
+  <div class="ctas"><a class="btn primary" href="#reading">Cast my chart <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="btn glass" href="#rashis">This month's palapala</a></div>
+  <div class="proof"><span>Lahiri ayanamsa</span><span>Vimshottari dasha</span><span>Classical Parashari readings</span></div>
+ </div></header>
+
+<main>
+<section class="s g" id="rashis"><div class="cap">
+ <div class="head"><div><span class="eyebrow">Monthly palapala</span><h2>Your Moon sign this <em>November</em></h2></div><p>Vedic forecasts follow your rashi, the sign the Moon was in when you were born. Choose yours for the month ahead.</p></div>
+ <div class="rail" id="rail"></div></div></section>
+
+<section class="s g" id="tools" style="padding-top:0"><div class="cap">
+ <div class="head"><div><span class="eyebrow">Everything in one chart</span><h2>Tools that read like a <em>conversation</em></h2></div><p>Every tool works from your own birth chart and speaks plainly. No tables of jargon unless you ask for them.</p></div>
+ <div class="bento">
+  <article class="tile t-chart"><span class="tag">Kendaraya</span><h3>Your birth chart, in the Sri Lankan square</h3>
+   <svg class="kd" viewBox="0 0 400 400" role="img" aria-label="Sample birth chart"><defs><linearGradient id="kg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#b7a6ff"/><stop offset="1" stop-color="#ff9fc8"/></linearGradient></defs>
+    <path class="lag" d="M200 4L298 102L200 200L102 102Z"/><path class="ln" d="M4 4H396V396H4Z M4 4L396 396M396 4L4 396M200 4L396 200L200 396L4 200Z"/>
+    <text class="asc" x="200" y="92" text-anchor="middle">Lagna</text><text x="200" y="114" text-anchor="middle">Ju</text><text x="300" y="196" text-anchor="middle">Su Ve</text><text x="300" y="214" text-anchor="middle">Ke</text>
+    <text x="200" y="304" text-anchor="middle">Ma</text><text x="300" y="364" text-anchor="middle">Mo</text><text x="104" y="40" text-anchor="middle">Ra</text><text x="36" y="104" text-anchor="middle">Me</text><text x="364" y="304" text-anchor="middle">Sa</text>
+    </svg>
+   <div class="row"><p>Lagna, planets and houses, with each placement explained in a sentence.</p><a class="btn glass" href="#reading">Cast mine</a></div></article>
+  <article class="tile t-today"><span class="tag">Today · Colombo</span><div class="today"><canvas id="moonMini" width="192" height="192" aria-label="Today's moon phase"></canvas><div class="kv" id="todayKv"></div></div></article>
+  <article class="tile t-dasha"><span class="tag">Life periods</span><h3>See which chapter of life you're in</h3>
+   <div class="bars"><div class="bar" style="--c1:#7fe0d2;--c2:#5fb7ff"><span>Jupiter</span><i style="width:100%"></i><b>to 2034</b></div><div class="bar" style="--c1:#b7a6ff;--c2:#ff9fc8"><span>Saturn</span><i style="width:88%"></i><b>2034–53</b></div><div class="bar" style="--c1:#f6c97e;--c2:#ff9f7a"><span>Mercury</span><i style="width:76%"></i><b>2053–70</b></div></div></article>
+  <article class="tile t-por"><span class="tag">Porondam</span><h3>Match two charts</h3>
+   <svg class="ring" viewBox="0 0 120 120" role="img" aria-label="Sample match score 28 of 36"><circle cx="60" cy="60" r="50" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="9"/><circle cx="60" cy="60" r="50" fill="none" stroke="url(#kg)" stroke-width="9" stroke-linecap="round" stroke-dasharray="244 314" transform="rotate(-90 60 60)"/><text x="60" y="58" text-anchor="middle" font-family="Instrument Serif,Georgia" font-size="34" fill="#f5f3fc">28</text><text x="60" y="78" text-anchor="middle" font-family="Geist Mono,monospace" font-size="11" fill="#8e88a8">of 36</text></svg>
+   <p>Points, doshas and a clear verdict.</p></article>
+  <article class="tile t-nak"><span class="tag">Nakath</span><h3>Good times</h3><div class="nak" id="nakList"></div></article>
+ </div></div></section>
+
+<section class="s g" id="reading" style="padding-top:0"><div class="cap reading">
+ <div><span class="eyebrow">Your full reading</span><div class="head" style="margin:0"><h2>Know yourself. Know <em>when</em>.</h2></div>
+  <ul>
+   <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg><span><b>Your nature.</b> What your lagna, Moon and birth star say about you.</span></li>
+   <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg><span><b>Career, money, marriage and health.</b> Each area read from its house and ruler.</span></li>
+   <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg><span><b>Dates that matter.</b> Likely windows for marriage, a new job, property and travel.</span></li>
+   <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg><span><b>Simple remedies.</b> Which planets to strengthen, and which to calm.</span></li>
+  </ul></div>
+ <form class="formcard" id="rf" autocomplete="off"><h3>Cast your chart</h3>
+  <div class="fgrid">
+   <div class="field full"><label for="r-name">Full name</label><input id="r-name" placeholder="Nimal Perera"></div>
+   <div class="field"><label for="r-date">Date of birth</label><input id="r-date" type="date" value="1990-08-15"></div>
+   <div class="field"><label for="r-time">Time of birth</label><input id="r-time" type="time" value="10:30"></div>
+   <div class="field full"><label for="r-place">Place of birth</label><select id="r-place"><option>Colombo</option><option>Kandy</option><option>Galle</option><option>Jaffna</option><option>Kurunegala</option><option>Matara</option></select></div>
+  </div>
+  <button class="btn primary" type="submit">See my reading</button>
+  <p class="fine" id="rfMsg">Free · takes about ten seconds · your details stay on your device</p></form>
+</div></section>
+
+<section class="s g" id="guides" style="padding-top:0"><div class="cap">
+ <div class="head"><div><span class="eyebrow">Learn</span><h2>Guides to your <em>chart</em></h2></div><a class="btn glass" href="#guides">All guides</a></div>
+ <div class="guides">
+  <a class="guide" href="#guides"><div class="art a1"><span>Transits</span></div><h3>Sade Sati, without the fear</h3><p>What Saturn's seven-and-a-half years really mean · 7 min</p></a>
+  <a class="guide" href="#guides"><div class="art a2"><span>Basics</span></div><h3>Your lagna, the sign rising when you were born</h3><p>Why your birth time matters so much · 5 min</p></a>
+  <a class="guide" href="#guides"><div class="art a3"><span>Marriage</span></div><h3>Porondam, explained point by point</h3><p>What each of the matching points checks · 9 min</p></a>
+ </div></div></section>
+
+<section class="g" style="padding-bottom:20px"><div class="cap closing"><span class="eyebrow">Your palapala</span><h2>A complete reading of your <em>life</em></h2><p>Nature, career, money, marriage, health, your life periods and the best dates ahead, in one beautiful book you can keep.</p><a class="btn primary" href="#reading">Create my palapala</a></div></section>
+</main>
+
+<footer class="g"><div class="cap"><div class="cols">
+ <div><a class="logo" href="#top" style="margin-bottom:12px;color:var(--ink)"><svg viewBox="0 0 32 32" aria-hidden="true" width="26" height="26"><rect x="2" y="2" width="28" height="28" rx="3" fill="none" stroke="url(#lg)" stroke-width="1.6"/><path d="M16 2L30 16L16 30L2 16Z M2 2L30 30M30 2L2 30" fill="none" stroke="url(#lg)" stroke-width="1"/></svg>Graha Kendra</a><p style="margin:0;max-width:32ch">Vedic astrology for Sri Lanka, in plain words.</p></div>
+ <div><h4>Readings</h4><a href="#reading">Birth chart</a><a href="#rashis">Monthly palapala</a><a href="#tools">Life periods</a></div>
+ <div><h4>Tools</h4><a href="#tools">Porondam</a><a href="#tools">Nakath</a><a href="#tools">Panchanga</a></div>
+ <div><h4>Learn</h4><a href="#guides">Guides</a><a href="#guides">How we calculate</a><a href="#guides">About</a></div></div>
+ <p class="legal">Readings are for guidance and reflection. Positions use the Lahiri ayanamsa.</p></div></footer>
+
+<script src="core.js"></script>
+<script>
+/* ---- live sky data (Colombo) ---- */
+const NOW=Date.now(),JD=NOW/864e5+2440587.5,TZ=5.5,LAT=6.9271,LON=79.8612;
+const TP=tropical(JD),SP=siderealAll(JD),ELO=norm(TP.Mo-TP.Su),TI=Math.floor(ELO/12),NK=nakOf(SP.Mo),YI=Math.floor(norm(SP.Su+SP.Mo)/(360/27));
+const tname=i=>i===14?'Purnima':i===29?'Amavasya':TITHI[i%15],pk=i=>i<15?'Shukla':'Krishna';
+const LOC=new Date(NOW+TZ*36e5),EV=sunEvents(LOC.getUTCFullYear(),LOC.getUTCMonth()+1,LOC.getUTCDate(),LAT,LON,TZ),WD=LOC.getUTCDay();
+let RK='—',GOOD='—';if(EV){const p=(EV.set-EV.rise)/8,k=[7,1,6,4,5,3,2][WD];RK=`${fmtHr(EV.rise+p*k)}–${fmtHr(EV.rise+p*(k+1))}`;GOOD=`${fmtHr(EV.noon-0.4)}–${fmtHr(EV.noon+0.4)}`}
+const LIT=Math.round((1-Math.cos(ELO*Math.PI/180))/2*100);
+document.getElementById('liveChip').textContent=`Tonight · ${pk(TI)} ${tname(TI)} · Moon in ${NK.name}`;
+document.getElementById('todayKv').innerHTML=[['Tithi',`${pk(TI)} ${tname(TI)}`],['Nakshatra',NK.name],['Sunrise',EV?fmtHr(EV.rise):'—'],['Rahu kalaya',RK],['Yoga',YOGA[YI]],['Moon',`${LIT}% lit`]].map(([k,v])=>`<div><span>${k}</span><b>${v}</b></div>`).join('');
+document.getElementById('nakList').innerHTML=[['Abhijit',GOOD],['Avoid',RK],['Sunset',EV?fmtHr(EV.set):'—']].map(([k,v])=>`<div><b style="font-weight:500">${k}</b><span>${v}</span></div>`).join('');
+/* ---- rashi rail ---- */
+const ELEM=['fire','earth','air','water'],ORBS={fire:['#ffcf8a','#ff7a59','#7a1f2b','#ff8a5c'],earth:['#e9f0b5','#8fbf7a','#1f3b2e','#9fd08a'],air:['#e6e2ff','#9f8cff','#2a2363','#a896ff'],water:['#c8fff4','#4fc3c9','#0f2f4a','#5fd6d6']};
+const LORD={0:'Mars',1:'Venus',2:'Mercury',3:'Moon',4:'Sun',5:'Mercury',6:'Venus',7:'Mars',8:'Jupiter',9:'Saturn',10:'Saturn',11:'Jupiter'};
+document.getElementById('rail').innerHTML=SIGNS.map((s,i)=>{const o=ORBS[ELEM[i%4]];return `<a class="rcard" href="#rashis"><div class="orb" style="--glow:${o[3]};background:radial-gradient(circle at 32% 28%,${o[0]} 0%,${o[1]} 38%,${o[2]} 78%)"></div><span class="n">${s[0]}</span><span class="e">${s[1]} · ${ELEM[i%4]}</span><div class="meta"><span>Ruler <b>${LORD[i]}</b></span><span>Read →</span></div></a>`}).join('');
+/* ---- mini moon ---- */
+(function(){const cv=document.getElementById('moonMini'),c=cv.getContext('2d'),W=cv.width,R=W*0.4,cx=W/2,cy=W/2,k=Math.cos(ELO*Math.PI/180),wax=ELO<180;
+ const g=c.createRadialGradient(cx,cy,R*.9,cx,cy,R*1.25);g.addColorStop(0,'rgba(183,166,255,.25)');g.addColorStop(1,'rgba(183,166,255,0)');c.fillStyle=g;c.fillRect(0,0,W,W);
+ c.fillStyle='#1a1630';c.beginPath();c.arc(cx,cy,R,0,7);c.fill();c.save();c.beginPath();c.arc(cx,cy,R,0,7);c.clip();
+ const lg=c.createRadialGradient(cx-R*.3,cy-R*.3,R*.1,cx,cy,R);lg.addColorStop(0,'#fbf9ff');lg.addColorStop(1,'#bdb3e6');
+ c.fillStyle=lg;c.beginPath();c.arc(cx,cy,R,-Math.PI/2,Math.PI/2,!wax);c.closePath();c.fill();c.fillStyle=k>0?'#1a1630':lg;c.beginPath();c.ellipse(cx,cy,Math.abs(k)*R,R,0,0,7);c.fill();c.restore();
+ c.strokeStyle='rgba(220,212,255,.35)';c.lineWidth=2;c.beginPath();c.arc(cx,cy,R,0,7);c.stroke()})();
+/* ---- form (mock) ---- */
+document.getElementById('rf').addEventListener('submit',e=>{e.preventDefault();document.getElementById('rfMsg').textContent='This is a design preview. In the full site this opens your reading.'});
+
+/* ---- rendered sky (WebGL) ---- */
+(function(){
+ const cv=document.getElementById('sky');const gl=cv.getContext('webgl',{antialias:false,premultipliedAlpha:false});if(!gl){cv.remove();return}
+ const vs=`attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}`;
+ const fs=`precision highp float;
+uniform vec2 uRes;uniform float uTime;uniform vec3 uP1;uniform vec3 uP2;
+float h3(vec3 p){p=fract(p*.3183099+.1);p*=17.;return fract(p.x*p.y*p.z*(p.x+p.y+p.z));}
+float n3(vec3 x){vec3 i=floor(x),f=fract(x);f=f*f*(3.-2.*f);
+ return mix(mix(mix(h3(i),h3(i+vec3(1,0,0)),f.x),mix(h3(i+vec3(0,1,0)),h3(i+vec3(1,1,0)),f.x),f.y),mix(mix(h3(i+vec3(0,0,1)),h3(i+vec3(1,0,1)),f.x),mix(h3(i+vec3(0,1,1)),h3(i+vec3(1,1,1)),f.x),f.y),f.z);}
+float fbm(vec3 p){float a=.5,s=0.;for(int i=0;i<5;i++){s+=a*n3(p);p=p*2.02+vec3(1.7,9.2,3.1);a*=.5;}return s;}
+float h2(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+vec3 L=normalize(vec3(-.72,.42,.55));
+vec4 planet(vec2 uv,vec3 P,float seed,float bandF,vec3 cA,vec3 cB,vec3 cC,vec3 atm){
+ vec2 d=(uv-P.xy)/P.z;float r=length(d);vec3 col=vec3(0.);
+ float facing=dot(normalize(d+1e-5),normalize(L.xy))*.5+.5;
+ float glow=exp(-max(r-1.,0.)*7.)*(.25+.75*facing)*step(1.,r);
+ if(r>=1.)return vec4(atm*glow*.55,0.);
+ vec3 n=vec3(d,sqrt(1.-r*r));float a=uTime*.012+seed;
+ vec3 q=vec3(cos(a)*n.x+sin(a)*n.z,n.y,-sin(a)*n.x+cos(a)*n.z);
+ float w=fbm(q*2.2+seed);float lat=q.y*.94+q.x*.34;
+ float bands=sin(lat*bandF+w*5.)*.5+.5;float det=fbm(q*7.+seed*2.);
+ col=mix(cA,cB,bands);col=mix(col,cC,smoothstep(.5,.85,det)*.55);
+ float diff=clamp(dot(n,L),0.,1.);float term=smoothstep(-.2,.45,dot(n,L));
+ float rim=pow(1.-n.z,2.2);
+ vec3 lit=col*(.025+1.15*diff)+atm*rim*(.18+1.1*term);
+ float spec=pow(max(dot(reflect(-L,n),vec3(0,0,1)),0.),24.)*.12;lit+=spec;
+ float edge=smoothstep(1.,.992,r);
+ return vec4(lit,edge);}
+void main(){
+ vec2 fc=gl_FragCoord.xy;float m=min(uRes.x,uRes.y);vec2 uv=(fc-.5*uRes)/m;
+ vec3 col=vec3(.010,.008,.026);
+ float nb=fbm(vec3(uv*1.4,uTime*.006));float nb2=fbm(vec3(uv*2.6+4.,uTime*.005+3.));
+ col+=vec3(.36,.13,.50)*pow(nb,3.2)*.75;col+=vec3(.10,.16,.52)*pow(nb2,3.8)*.7;
+ col+=vec3(.55,.25,.65)*exp(-length(uv-uP1.xy*vec2(.92,1.)+vec2(.35,.1))*2.2)*.10;
+ for(int k=0;k<3;k++){float sc=k==0?110.:k==1?55.:28.;vec2 g=uv*sc+float(k)*17.;vec2 id=floor(g);vec2 f=fract(g)-.5;float h=h2(id+float(k)*13.1);
+  float th=k==0?.86:k==1?.93:.975;if(h>th){vec2 o=(vec2(h2(id+1.3),h2(id+7.7))-.5)*.7;float dd=length(f-o)*m/sc;
+   float tw=.7+.3*sin(uTime*(.8+h*2.)+h*50.);float sz=k==0?.7:k==1?1.:1.4;
+   float s=exp(-dd*dd/(sz*sz))*tw*(h-th)/(1.-th);col+=mix(vec3(.75,.8,1.),vec3(1.,.85,.9),h2(id+3.))*s*(k==2?1.6:1.1);}}
+ vec4 p1=planet(uv,uP1,1.3,11.,vec3(.20,.16,.48),vec3(.52,.42,.86),vec3(.86,.55,.80),vec3(.62,.50,1.));
+ col=col*(1.-p1.a)+p1.rgb*p1.a+(p1.a<.5?p1.rgb:vec3(0.));
+ vec4 p2=planet(uv,uP2,7.7,4.,vec3(.42,.20,.36),vec3(.85,.56,.70),vec3(.30,.18,.40),vec3(1.,.62,.82));
+ col=col*(1.-p2.a)+p2.rgb*p2.a+(p2.a<.5?p2.rgb:vec3(0.));
+ col=1.-exp(-col*1.25);col=pow(col,vec3(.92));
+ col+=(h2(fc+fract(uTime))-.5)/255.;
+ gl_FragColor=vec4(col,1.);}`;
+ const sh=(t,s)=>{const o=gl.createShader(t);gl.shaderSource(o,s);gl.compileShader(o);if(!gl.getShaderParameter(o,gl.COMPILE_STATUS)){console.warn(gl.getShaderInfoLog(o));return null}return o};
+ const v=sh(gl.VERTEX_SHADER,vs),f=sh(gl.FRAGMENT_SHADER,fs);if(!v||!f){cv.remove();return}
+ const pr=gl.createProgram();gl.attachShader(pr,v);gl.attachShader(pr,f);gl.linkProgram(pr);gl.useProgram(pr);
+ const b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
+ const loc=gl.getAttribLocation(pr,'p');gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+ const uRes=gl.getUniformLocation(pr,'uRes'),uT=gl.getUniformLocation(pr,'uTime'),u1=gl.getUniformLocation(pr,'uP1'),u2=gl.getUniformLocation(pr,'uP2');
+ let W=0,H=0;
+ function size(){const d=Math.min(devicePixelRatio||1,1.6),r=cv.getBoundingClientRect();W=Math.round(r.width*d);H=Math.round(r.height*d);cv.width=W;cv.height=H;gl.viewport(0,0,W,H);gl.uniform2f(uRes,W,H);
+  const m=Math.min(W,H),xr=W/m/2,yr=H/m/2,wide=W>H;
+  if(wide){gl.uniform3f(u1,xr*1.02,yr*.30,.64);gl.uniform3f(u2,xr*.30,-yr*.72,.085)}else{gl.uniform3f(u1,.36,yr*.70,.46);gl.uniform3f(u2,.30,-yr*.80,.07)}}
+ const still=matchMedia('(prefers-reduced-motion: reduce)').matches;let vis=true,t0=performance.now(),last=0;
+ function frame(t){if(vis){if(t-last>33){gl.uniform1f(uT,(t-t0)/1000+40.);gl.drawArrays(gl.TRIANGLES,0,3);last=t}}if(!still)requestAnimationFrame(frame)}
+ size();addEventListener('resize',()=>{size();if(still){gl.uniform1f(uT,40.);gl.drawArrays(gl.TRIANGLES,0,3)}});
+ new IntersectionObserver(es=>{vis=es[0].isIntersecting}).observe(cv);
+ if(still){gl.uniform1f(uT,40.);gl.drawArrays(gl.TRIANGLES,0,3)}else requestAnimationFrame(frame);
+})();
+</script>

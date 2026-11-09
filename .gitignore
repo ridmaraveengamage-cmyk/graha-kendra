@@ -1,0 +1,13 @@
+# Firebase local files
+.firebase/
+.firebaserc
+firebase-debug.log
+firestore-debug.log
+# Never commit service account keys
+*service-account*.json
+*-firebase-adminsdk-*.json
+# Tools and system files
+node_modules/
+.claude/
+.DS_Store
+Thumbs.db

@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Life Map</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Manrope:wght@400;500;700&display=swap">
+<style>
+/* Layout: one column. Summary sentence, then a horizontal life timeline, then the selected period explained in plain words. */
+:root{--bg:#f3f6f8;--card:#ffffff;--ink:#14222e;--muted:#5a6b78;--line:#d7e0e6;
+ --good:#0f8a6c;--good-bg:#dff3ec;--mixed:#a46a00;--mixed-bg:#fbefd5;--hard:#c2462b;--hard-bg:#fbe3dc;--accent:#2a4d9b;
+ --display:"Fraunces",Georgia,serif;--body:"Manrope","Segoe UI",system-ui,sans-serif;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1a22;--card:#16242f;--ink:#e6eef3;--muted:#93a6b3;--line:#283b48;--good:#4fd1a8;--good-bg:#123a30;--mixed:#f2bd4b;--mixed-bg:#3a2e12;--hard:#ff8a6e;--hard-bg:#3d1d16;--accent:#8fb0ff;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0f1a22;--card:#16242f;--ink:#e6eef3;--muted:#93a6b3;--line:#283b48;--good:#4fd1a8;--good-bg:#123a30;--mixed:#f2bd4b;--mixed-bg:#3a2e12;--hard:#ff8a6e;--hard-bg:#3d1d16;--accent:#8fb0ff;color-scheme:dark}
+*{box-sizing:border-box}html{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--body)}
+.wrap{max-width:1100px;margin:0 auto;padding-block:20px 56px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:22px}
+.wrap>*{min-width:0}
+h1,h2,h3{font-family:var(--display);font-weight:600;margin:0;line-height:1.2;text-wrap:balance}
+h1{font-size:clamp(1.9rem,4vw,2.6rem)}h2{font-size:1.45rem}h3{font-size:1.1rem}
+p{margin:0}.muted{color:var(--muted)}
+.top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.top a{color:var(--accent);font-weight:700;text-decoration:none}
+.bf{display:flex;flex-wrap:wrap;gap:10px;align-items:end;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px}
+.f{display:grid;gap:3px;font-size:.8rem;font-weight:700;color:var(--muted);flex:1 1 130px;min-width:0}
+input,select{font:inherit;font-size:.95rem;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;width:100%;min-width:0}
+.go{font:inherit;font-weight:700;background:var(--accent);color:var(--card);border:0;border-radius:8px;padding:10px 16px;cursor:pointer}
+.adv{flex-basis:100%;font-size:.85rem;color:var(--muted)}.adv summary{cursor:pointer}.advrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}.hint{font-size:.8rem;margin-top:6px}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.hero{display:grid;gap:8px}
+.hero .big{font-family:var(--display);font-size:clamp(1.25rem,2.6vw,1.6rem);line-height:1.35;max-width:46ch}
+.q{display:inline-block;font-size:.78rem;font-weight:700;border-radius:999px;padding:2px 10px;font-family:var(--body);vertical-align:middle}
+.q-good{background:var(--good-bg);color:var(--good)}.q-mixed{background:var(--mixed-bg);color:var(--mixed)}.q-hard{background:var(--hard-bg);color:var(--hard)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:.85rem;color:var(--muted);align-items:center}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.tlbox{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 0 8px}
+.tl{overflow-x:auto;padding:0 14px 6px;scrollbar-width:thin}
+.track{position:relative;height:196px}
+.row-label{position:sticky;left:0;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.blk{position:absolute;border:0;border-radius:6px;cursor:pointer;font:inherit;text-align:left;padding:0;overflow:hidden}
+.blk.md{top:22px;height:52px;padding:6px 8px;font-weight:700;font-size:.85rem;color:var(--ink);border:1px solid transparent}
+.blk.md small{display:block;font-weight:500;font-size:.72rem;color:var(--muted)}
+.blk.ad{top:82px;height:22px}
+.md.q-good,.ad.q-good{background:var(--good-bg)}.md.q-mixed,.ad.q-mixed{background:var(--mixed-bg)}.md.q-hard,.ad.q-hard{background:var(--hard-bg)}
+.ad.q-good{background:var(--good)}.ad.q-mixed{background:var(--mixed)}.ad.q-hard{background:var(--hard)}
+.blk.sel{outline:3px solid var(--ink);outline-offset:1px}
+.tick{position:absolute;top:110px;font-size:.72rem;color:var(--muted);transform:translateX(-50%)}
+.tick::before{content:"";position:absolute;left:50%;top:-6px;height:5px;border-left:1px solid var(--line)}
+.now{position:absolute;top:10px;bottom:4px;border-left:2px dashed var(--accent)}
+.now span{position:absolute;top:-6px;left:4px;font-size:.72rem;font-weight:700;color:var(--accent);white-space:nowrap}
+.ev{position:absolute;font-size:.72rem;font-weight:700;color:var(--accent);background:var(--card);border:1px solid var(--accent);border-radius:999px;padding:1px 8px;white-space:nowrap;cursor:pointer}
+.detail{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;display:grid;gap:14px}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:14px}
+.box{border-radius:10px;padding:12px 14px;display:grid;gap:6px;align-content:start}
+.box.g{background:var(--good-bg)}.box.c{background:var(--hard-bg)}.box.n{background:var(--bg)}
+.box h3{font-size:1rem}.box ul{margin:0;padding-left:18px}
+.subs{display:flex;flex-wrap:wrap;gap:6px}
+.subs button{font:inherit;font-size:.82rem;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:999px;padding:3px 10px;cursor:pointer}
+.moments{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:10px}
+.mom{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:grid;gap:2px}
+.mom b{font-family:var(--display);font-size:1.05rem}.mom .when{font-weight:700;color:var(--accent)}
+.foot{font-size:.82rem;color:var(--muted);max-width:75ch}
+@media (prefers-reduced-motion:no-preference){.detail{animation:in .25s ease}@keyframes in{from{opacity:.5;transform:translateY(4px)}to{opacity:1}}}
+</style></head><body>
+<div class="wrap">
+ <div class="top"><h1>Your life map</h1><a href="index.html">All designs</a></div>
+ <div id="details"></div>
+ <section class="hero" id="hero"></section>
+ <section class="tlbox"><div class="tl" id="tl"><div class="track" id="track"></div></div>
+  <div class="legend" style="padding:6px 14px 0"><span><i style="background:var(--good)"></i>Good time</span><span><i style="background:var(--mixed)"></i>Mixed time</span><span><i style="background:var(--hard)"></i>Testing time</span><span>Top row: life chapters · Thin row: shorter phases · Tap any block</span></div></section>
+ <section class="detail" id="detail" aria-live="polite"></section>
+ <section style="display:grid;gap:10px"><h2>Big moments ahead</h2><div class="moments" id="moments"></div></section>
+ <p class="foot">Chapters are Vimshottari dasha periods from your Moon's birth star; phases are their sub-periods. Colours combine how helpful the ruling planet is for your rising sign with how strong it is in your chart. Moments use the dasha plus the Jupiter–Saturn double-transit rule. Positions use Lahiri ayanamsa. For guidance and reflection only.</p>
+</div>
+<script src="readings.js"></script><script src="core.js"></script><script src="shared.js"></script>
+<script>
+let PER=[],SEL=null;
+function build(){
+ const birth=A.c.utcMs,span=100*YR,W=Math.max(1400,innerWidth*1.6),px=t=>((t-birth)/span)*W,now=Date.now();
+ PER=[];let h='',tH=196;
+ h+=`<span class="row-label" style="position:absolute;top:2px;left:0">Life chapters</span>`;
+ for(const d of A.dasha){if(d.end<=birth||d.start>=birth+span)continue;const s=Math.max(d.start,birth),e=Math.min(d.end,birth+span),i=PER.push({md:d.lord,ad:null,start:d.start,end:d.end})-1;
+  h+=`<button class="blk md q-${quality(d.lord)}" data-i="${i}" style="left:${px(s)}px;width:${px(e)-px(s)-2}px">${P[d.lord].n}<small>age ${ageAt(s)}–${ageAt(e)}</small></button>`;
+  for(const sb of d.subs){if(sb.end<=birth||sb.start>=birth+span)continue;const a=Math.max(sb.start,birth),b=Math.min(sb.end,birth+span),j=PER.push({md:d.lord,ad:sb.lord,start:sb.start,end:sb.end})-1;
+   h+=`<button class="blk ad q-${quality(d.lord,sb.lord)}" data-i="${j}" style="left:${px(a)}px;width:${Math.max(3,px(b)-px(a)-1)}px" aria-label="${P[d.lord].n} – ${P[sb.lord].n}, ${fmtDate(sb.start)} to ${fmtDate(sb.end)}"></button>`}}
+ for(let y=0;y<=100;y+=5)h+=`<span class="tick" style="left:${px(birth+y*YR)}px">${y%10===0?`${y} yrs`:''}</span>`;
+ h+=`<div class="now" style="left:${px(now)}px"><span>Now · age ${ageAt(now)}</span></div>`;
+ const lanes=[];const evs=EVENTS.map(ev=>({ev,w:bestWindow(ev.k)})).filter(x=>x.w).map(x=>({...x,x:px(x.w.dt.length?x.w.dt[0][0]:x.w.s)})).sort((a,b)=>a.x-b.x);
+ for(const e of evs){const wd=EV_PLAIN[e.ev.k].length*7.2+22;let l=lanes.findIndex(end=>end<e.x);if(l<0){l=lanes.length;lanes.push(0)}lanes[l]=e.x+wd+6;
+  h+=`<span class="ev" style="left:${e.x}px;top:${138+l*26}px" data-ev="${e.ev.k}">${EV_PLAIN[e.ev.k]}</span>`}
+ tH=170+lanes.length*26;
+ const tr=document.getElementById('track');tr.style.width=W+'px';tr.style.height=tH+'px';tr.innerHTML=h;
+ document.getElementById('tl').scrollLeft=Math.max(0,px(now)-innerWidth*0.35);
+}
+function hero(){const{md,ad}=currentDasha(),b=A.birth,first=(b.name||'').split(' ')[0];
+ if(!md){document.getElementById('hero').innerHTML='';return}
+ const q=quality(md.lord),qa=quality(md.lord,ad.lord),pp=plainPeriod(md.lord,ad.lord);
+ document.getElementById('hero').innerHTML=`<p class="muted">${esc(b.place)} · ${b.d}/${b.m}/${b.y} · rising sign ${SIGNS[A.lag][1]} · Moon in ${SIGNS[A.moonS][1]}</p>
+ <p class="big">${first?esc(first)+', you':'You'} are in your <b>${P[md.lord].n} chapter</b> (${md.start>A.c.utcMs?fmtMonth(md.start):'birth'} – ${fmtMonth(md.end)}) <span class="q q-${q}">${QLABEL[q]}</span>. Right now the <b>${P[ad.lord].n} phase</b> runs until ${fmtMonth(ad.end)} <span class="q q-${qa}">${QLABEL[qa]}</span>${pp.goodFor.length?`, good for ${list(pp.goodFor.slice(0,2))}`:''}.</p>`}
+function show(i){SEL=i;const p=PER[i];document.querySelectorAll('.blk.sel').forEach(e=>e.classList.remove('sel'));const el=document.querySelector(`.blk[data-i="${i}"]`);if(el)el.classList.add('sel');
+ const pp=plainPeriod(p.md,p.ad),now=Date.now(),L=p.ad||p.md;
+ const title=p.ad?(p.ad===p.md?`The opening ${P[p.md].n} phase`:`${P[p.ad].n} phase`)+` <span class="muted" style="font-size:.7em">in your ${P[p.md].n} chapter</span>`:`Your ${P[p.md].n} chapter`;
+ let extra='';
+ if(!p.ad){const subs=PER.map((x,j)=>[x,j]).filter(([x])=>x.md===p.md&&x.ad&&x.start===x.start&&x.start>=p.start&&x.end<=p.end+1);
+  extra=`<div class="box n"><h3>Phases inside this chapter</h3><div class="subs">${subs.map(([x,j])=>`<button data-go="${j}"><span class="q q-${quality(x.md,x.ad)}" style="padding:0 6px">&nbsp;</span> ${P[x.ad].n} · ${fmtMonth(x.start)}</button>`).join('')}</div></div>`}
+ else{const rel=adRelation(p.md,p.ad);extra=`<div class="box n"><h3>How the two planets get on</h3><p>${rel.txt}</p></div>`;
+  if(p.end>now&&p.start<now+5*YR){const tt=transitTables(),ing=tt.ingress.filter(x=>x.ms>=Math.max(p.start,now)&&x.ms<p.end&&x.p!=='Ra').slice(0,5);
+   if(ing.length)extra+=`<div class="box n"><h3>Sky changes during this phase</h3><ul>${ing.map(x=>{const hm=houseFrom(x.to,A.moonS);return `<li><b>${fmtDate(x.ms)}</b>: ${P[x.p].n} moves to ${SIGNS[x.to][1]}. ${TR[x.p][hm-1]}</li>`}).join('')}</ul></div>`}}
+ document.getElementById('detail').innerHTML=`<div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline"><h2>${title}</h2><span class="q q-${pp.q}">${QLABEL[pp.q]}</span></div>
+ <p class="muted">${fmtDate(Math.max(p.start,A.c.utcMs))} – ${fmtDate(p.end)} · age ${ageAt(Math.max(p.start,A.c.utcMs))} to ${ageAt(p.end)}${now>=p.start&&now<p.end?' · <b style="color:var(--accent)">happening now</b>':''}</p>
+ <p style="max-width:70ch">${pp.brings} ${PIH[L][A.planets[L].house-1]}</p>
+ <div class="cols">${pp.goodFor.length?`<div class="box g"><h3>Good for</h3><ul>${pp.goodFor.map(x=>`<li>${x}</li>`).join('')}</ul></div>`:''}
+ ${pp.careful.length?`<div class="box c"><h3>Be careful with</h3><ul>${pp.careful.map(x=>`<li>${x}</li>`).join('')}</ul></div>`:''}
+ <div class="box n"><h3>What to do</h3><p>${pp.todo}</p></div></div>${extra}`}
+function moments(){document.getElementById('moments').innerHTML=EVENTS.map(ev=>{const w=bestWindow(ev.k);return `<div class="mom"><b>${EV_PLAIN[ev.k]}</b>${w?`<span class="when">${windowWhen(w)}</span><span class="muted">during your ${P[w.md].n}–${P[w.ad].n} phase${w.cls==='good'?', with Jupiter and Saturn both supporting':''}</span>`:'<span class="muted">No clear window in the next 25 years</span>'}</div>`}).join('')}
+document.getElementById('track').addEventListener('click',e=>{const b=e.target.closest('[data-i]');if(b)show(+b.dataset.i);const ev=e.target.closest('[data-ev]');if(ev){const w=bestWindow(ev.dataset.ev);const i=PER.findIndex(x=>x.ad===w.ad&&x.md===w.md&&x.end>=w.s&&x.start<=w.s);if(i>=0)show(i)}});
+document.getElementById('detail').addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b)show(+b.dataset.go)});
+mountForm(document.getElementById('details'),()=>{build();hero();moments();const now=Date.now();const i=PER.findIndex(x=>x.ad&&now>=x.start&&now<x.end);show(i>=0?i:0)});
+</script></body></html>

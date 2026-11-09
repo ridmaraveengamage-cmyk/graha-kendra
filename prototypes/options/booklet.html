@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Palapala Booklet</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Spectral:ital,wght@0,400;0,600;1,400&family=Manrope:wght@500;700&display=swap">
+<style>
+/* Layout: a bound book. Contents list on the left (top on phones), one long page of chapters on the right, set like print. */
+:root{--bg:#eceeea;--page:#ffffff;--ink:#1e2328;--muted:#5d646b;--line:#d9ddd6;--maroon:#8a2433;--gold:#9a6a0c;--good:#1d7a52;--warn:#9a5a00;--soft:#f4f5f2;
+ --display:"Cinzel","Trajan Pro",Georgia,serif;--body:"Spectral",Georgia,serif;--ui:"Manrope","Segoe UI",system-ui,sans-serif;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121416;--page:#1b1e21;--ink:#e8e6e1;--muted:#a3a8ad;--line:#30353a;--maroon:#e58a97;--gold:#e3b456;--good:#6fd3a3;--warn:#f0b75a;--soft:#22262a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#121416;--page:#1b1e21;--ink:#e8e6e1;--muted:#a3a8ad;--line:#30353a;--maroon:#e58a97;--gold:#e3b456;--good:#6fd3a3;--warn:#f0b75a;--soft:#22262a;color-scheme:dark}
+*{box-sizing:border-box}html{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.7 var(--body)}
+.wrap{max-width:1160px;margin:0 auto;padding-block:20px 56px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:18px}
+.top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;font-family:var(--ui)}
+.top a{color:var(--maroon);font-weight:700;text-decoration:none}
+.top b{font-family:var(--display);font-size:1.1rem;letter-spacing:.08em}
+.bf{display:flex;flex-wrap:wrap;gap:10px;align-items:end;background:var(--page);border:1px solid var(--line);border-radius:10px;padding:14px;font-family:var(--ui)}
+.f{display:grid;gap:3px;font-size:.78rem;font-weight:700;color:var(--muted);flex:1 1 130px;min-width:0}
+input,select{font:inherit;font-size:.92rem;font-weight:500;color:var(--ink);background:var(--soft);border:1px solid var(--line);border-radius:6px;padding:8px 10px;width:100%;min-width:0}
+.go{font:inherit;font-weight:700;background:var(--maroon);color:var(--page);border:0;border-radius:6px;padding:10px 16px;cursor:pointer}
+.adv{flex-basis:100%;font-size:.85rem;color:var(--muted)}.adv summary{cursor:pointer}.advrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}.hint{font-size:.8rem;margin-top:6px}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.book{display:grid;grid-template-columns:240px minmax(0,1fr);gap:22px;align-items:start}
+@media (max-width:860px){.book{grid-template-columns:minmax(0,1fr)}}
+nav.toc{position:sticky;top:calc(12px + env(safe-area-inset-top,0px));font-family:var(--ui);font-size:.9rem;background:var(--page);border:1px solid var(--line);border-radius:10px;padding:14px}
+@media (max-width:860px){nav.toc{position:static}}
+.toc ol{margin:8px 0 0;padding-left:22px;display:grid;gap:3px}.toc a{color:var(--ink);text-decoration:none}.toc a:hover{color:var(--maroon)}
+.toc .lbl{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.pages{background:var(--page);border:1px solid var(--line);border-radius:10px;padding:clamp(20px,5vw,56px);min-width:0}
+.cover{text-align:center;display:grid;gap:10px;padding-bottom:36px;border-bottom:1px solid var(--line)}
+.cover .orn{color:var(--gold);letter-spacing:.6em;font-size:.9rem}
+.cover h1{font-family:var(--display);font-weight:600;font-size:clamp(1.8rem,4.5vw,2.8rem);margin:0;letter-spacing:.04em;text-wrap:balance}
+.cover p{margin:0;color:var(--muted)}
+section.ch{padding-block:34px;border-bottom:1px solid var(--line);display:grid;gap:14px;max-width:70ch;margin:0 auto;scroll-margin-top:16px}
+.ch .no{font-family:var(--ui);font-size:.75rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--maroon)}
+.ch h2{font-family:var(--display);font-weight:500;font-size:1.6rem;margin:0;line-height:1.25;text-wrap:balance}
+.ch h3{font-family:var(--ui);font-size:.95rem;font-weight:700;margin:6px 0 0}
+.ch p{margin:0}
+.lead{font-size:1.12rem;font-style:italic;color:var(--muted)}
+.when{border-left:3px solid var(--gold);padding:8px 14px;background:var(--soft);border-radius:0}
+.when b{color:var(--gold)}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);font-family:var(--ui);font-size:.88rem}
+.facts div{background:var(--page);padding:10px 12px;display:grid}.facts span{color:var(--muted);font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;font-weight:700}
+.chart{max-width:340px;margin:0 auto;width:100%}.chart svg{width:100%;height:auto}
+svg .ln{stroke:var(--maroon);stroke-width:1.4;fill:none}svg .bgc{fill:var(--page)}svg .lagbg{fill:var(--soft)}
+svg .pl{fill:var(--ink);font:600 13px var(--ui)}svg .asc{fill:var(--maroon)}svg .sn{fill:var(--muted);font:10.5px var(--ui)}svg .ct{fill:var(--muted);font:15px var(--display)}
+.tbl{overflow-x:auto}table{border-collapse:collapse;width:100%;font-family:var(--ui);font-size:.86rem}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);white-space:nowrap}th{color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.06em}
+.tag{font-family:var(--ui);font-size:.75rem;font-weight:700;padding:1px 8px;border-radius:999px;border:1px solid currentColor}
+.t-good{color:var(--good)}.t-mixed{color:var(--gold)}.t-hard{color:var(--warn)}
+.per{display:grid;gap:4px;padding:12px 0;border-top:1px dashed var(--line)}
+.per .h{display:flex;gap:10px;flex-wrap:wrap;align-items:baseline;font-family:var(--ui);font-weight:700}
+ul.r{margin:0;padding-left:20px;display:grid;gap:6px}
+.foot{font-family:var(--ui);font-size:.8rem;color:var(--muted);max-width:75ch;margin:0 auto}
+</style></head><body>
+<div class="wrap">
+ <div class="top"><b>PALAPALA</b><a href="index.html">All designs</a></div>
+ <div id="details"></div>
+ <div class="book"><nav class="toc" id="toc" aria-label="Chapters"></nav><article class="pages" id="pages"></article></div>
+</div>
+<script src="readings.js"></script><script src="core.js"></script><script src="shared.js"></script>
+<script>
+const CH=[];const ch=(id,title,html)=>{CH.push([id,title]);return `<section class="ch" id="${id}"><span class="no">Chapter ${CH.length}</span><h2>${title}</h2>${html}</section>`};
+const ps=a=>a.map(t=>`<p>${t}</p>`).join('');
+function whenBox(k,label){const w=bestWindow(k);const ev=EVENTS.find(e=>e.k===k),all=eventWindows(ev).filter(x=>x!==w).slice(0,2);
+ if(!w)return `<p class="when">No clear window for ${label} appears in the next 25 years by these rules.</p>`;
+ return `<p class="when"><b>Best time for ${label}: ${windowWhen(w)}</b>, in your ${P[w.md].n}–${P[w.ad].n} phase${w.cls==='good'?', when the dasha and the Jupiter–Saturn transits agree':''}.${all.length?` Other openings: ${all.map(windowWhen).join('; ')}.`:''}</p>`}
+function areaChapter(hs,intro){return hs.map(h=>{const [q,l]=areaLevel(h);return `<h3>${AREA[h-1]} · <span class="tag t-${q}">${l}</span></h3>${ps(houseStory(h))}`}).join('')}
+function write(){CH.length=0;const b=A.birth,pl=A.planets,LD=LAGNA_D[A.lag],nd=NAK_D[pl.Mo.nak.i],{md,ad}=currentDasha(),ti=Math.floor(norm(pl.Mo.lon-pl.Su.lon)/12);
+ const tName=ti===14?'Purnima':ti===29?'Amavasya':TITHI[ti%15],LL=SIGN_LORD[A.lag],tenL=A.lordOf(10),T=transitInfo();
+ let h=`<div class="cover"><span class="orn">✦ ✦ ✦</span><h1>${esc(b.name||'Your horoscope')}</h1><p>Born ${new Date(Date.UTC(b.y,b.m-1,b.d)).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'})} at ${String(b.hh).padStart(2,'0')}:${String(b.mm).padStart(2,'0')}, ${esc(b.place)}</p><p>${SIGNS[A.lag][0]} lagna · ${SIGNS[A.moonS][0]} rashi · ${pl.Mo.nak.name} nakshatra</p></div>`;
+ h+=ch('birth','Your birth details',`<div class="facts"><div><span>Rising sign</span>${SIGNS[A.lag][0]} (${SIGNS[A.lag][1]})</div><div><span>Moon sign</span>${SIGNS[A.moonS][0]} (${SIGNS[A.moonS][1]})</div><div><span>Birth star</span>${pl.Mo.nak.name}, pada ${pl.Mo.nak.pada}</div><div><span>Tithi</span>${tName}, ${ti<15?'Shukla':'Krishna'} paksha</div><div><span>Weekday</span>${VARA[new Date(Date.UTC(b.y,b.m-1,b.d)).getUTCDay()]}</div><div><span>Starting dasha</span>${P[pl.Mo.nak.lord].n}, ${((1-pl.Mo.nak.frac)*DASHA_YRS[pl.Mo.nak.lord]).toFixed(1)} years left</div></div><div class="chart">${northChart(A,false,'Rashi')}</div><p class="muted" style="font-size:.9rem;text-align:center">Birth chart (kendaraya). The shaded diamond at the top is the first house.</p>`);
+ h+=ch('nature','Your nature',`<p class="lead">${LD.nature}</p><p><b>How you come across.</b> ${LD.look}</p><p><b>Your strengths.</b> ${LD.str}</p><p><b>What to work on.</b> ${LD.weak}</p><p><b>Where your life is pointed.</b> The ruler of your rising sign, ${P[LL].n}, sits in your ${AREA[pl[LL].house-1].toLowerCase()} area. ${LIH[0][pl[LL].house-1]}</p>${A.occupants(1).map(p=>`<p>${P[p].n} sits right on your rising sign. ${PIH[p][0]}</p>`).join('')}`);
+ h+=ch('mind','Your mind and feelings',`<p>${MOON_D[A.moonS]}</p><p>${PIH.Mo[pl.Mo.house-1]}</p>`);
+ h+=ch('star','Your birth star',`<p class="lead">${pl.Mo.nak.name}: ${nd[3]}</p><p>Its guardian is ${nd[0]} and its symbol is the ${nd[1].toLowerCase()}. People of this star belong to the ${nd[2]} gana, which matters in marriage matching.</p><p><b>Work that suits this star.</b> ${nd[4]}</p><p><b>Watch for.</b> ${nd[5]}</p>`);
+ h+=ch('career','Career and work',`${areaChapter([10])}<p><b>Fields that suit you.</b> ${CAREER[tenL]}${A.occupants(10).filter(p=>p!==tenL).slice(0,2).map(p=>'; '+CAREER[p]).join('')}. Your rising sign also favours ${LD.career.toLowerCase()}</p>${whenBox('career','a career rise or new job')}`);
+ h+=ch('money','Money',`${areaChapter([2,11])}${whenBox('wealth','money gains')}`);
+ h+=ch('love','Love and marriage',`${areaChapter([7])}<p>Venus, the planet of love, sits in your ${AREA[pl.Ve.house-1].toLowerCase()} area. ${PIH.Ve[pl.Ve.house-1]}</p>${A.doshas.filter(d=>d[0].startsWith('Kuja')).map(d=>`<p><b>Kuja dosha.</b> ${d[1]}</p>`).join('')}${whenBox('marriage','marriage')}`);
+ h+=ch('home','Home and family',`${areaChapter([4])}${whenBox('property','buying property or a vehicle')}`);
+ h+=ch('children','Children and studies',`${areaChapter([5,9])}${whenBox('children','children')}${whenBox('education','higher studies')}`);
+ h+=ch('health','Health',`<p>Your rising sign asks you to look after your ${LD.health.toLowerCase()}</p>${areaChapter([6])}<p>The ruler of your health area is ${P[A.lordOf(6)].n}, so ${P[A.lordOf(6)].n}'s phases are the times to be most careful. ${A.planets[A.lordOf(8)]?`Your area of sudden change is ruled by ${P[A.lordOf(8)].n}.`:''}</p>`);
+ h+=ch('abroad','Travel and life abroad',`${areaChapter([12])}${whenBox('foreign','going abroad')}`);
+ const now=Date.now();
+ h+=ch('periods','The chapters of your life',`<p>Your life moves through planetary periods (dashas). Each colours many years with one planet's themes.</p>${A.dasha.map(d=>{const q=quality(d.lord),pp=plainPeriod(d.lord),cur=now>=d.start&&now<d.end;return `<div class="per"><div class="h"><span>${P[d.lord].n} period</span><span class="muted" style="font-weight:500">age ${ageAt(Math.max(d.start,A.c.utcMs))}–${ageAt(d.end)} · ${fmtMonth(Math.max(d.start,A.c.utcMs))} – ${fmtMonth(d.end)}</span><span class="tag t-${q}">${QLABEL[q]}</span>${cur?'<span class="tag" style="color:var(--maroon)">Now</span>':''}</div><p>${pp.brings} ${pp.goodFor.length?`Good for ${list(pp.goodFor)}.`:''} ${pp.careful.length?`Take care with ${list(pp.careful)}.`:''}</p></div>`}).join('')}`);
+ const ads=A.dasha.flatMap(d=>d.subs.map(s=>({...s,md:d.lord}))).filter(s=>s.end>now&&s.start<now+5*YR);
+ h+=ch('next','The next five years',`${ads.map(s=>{const q=quality(s.md,s.lord),pp=plainPeriod(s.md,s.lord);return `<div class="per"><div class="h"><span>${fmtMonth(Math.max(s.start,now))} – ${fmtMonth(s.end)}</span><span class="muted" style="font-weight:500">${P[s.md].n}–${P[s.lord].n}</span><span class="tag t-${q}">${QLABEL[q]}</span></div><p>${pp.brings} ${PIH[s.lord][pl[s.lord].house-1]}</p><p>${pp.goodFor.length?`<b>Good for:</b> ${list(pp.goodFor)}. `:''}${pp.careful.length?`<b>Take care with:</b> ${list(pp.careful)}.`:''}</p></div>`}).join('')}
+ <h3>The slow planets now</h3><p><b>Saturn</b> is ${ord(T.Sa.fromMoon)} from your Moon. ${TR.Sa[T.Sa.fromMoon-1]}</p><p><b>Jupiter</b> is ${ord(T.Ju.fromMoon)} from your Moon. ${TR.Ju[T.Ju.fromMoon-1]}</p>`);
+ const helpful=ORDER.filter(p=>funcNature(p).cls==='good'),testing=ORDER.filter(p=>funcNature(p).cls==='bad');
+ h+=ch('remedies','Remedies and good habits',`<p><b>Planets on your side:</b> ${list(helpful.map(p=>P[p].n))||'none clearly'}. Strengthen these with their mantras, colours and gemstones.</p><p><b>Planets that test you:</b> ${list(testing.map(p=>P[p].n))||'none clearly'}. Calm these with mantra and charity; do not wear their gemstones.</p>
+ <ul class="r">${[...new Set([LL,md&&md.lord,ad&&ad.lord].filter(Boolean))].map(p=>`<li><b>${P[p].n}</b> (${p===LL?'ruler of your rising sign':'running period'}): ${plainPeriod(p).todo}</li>`).join('')}</ul>
+ <p><b>Your life stone</b> is the gem of ${P[LL].n}: ${GEM[LL]}. Have an astrologer confirm before wearing any gemstone.</p><p><b>Lucky day:</b> ${P[LL].day}. <b>Lucky colours:</b> ${P[LL].color}.</p>`);
+ h+=ch('appendix','Appendix: planetary positions',`<div class="tbl"><table><thead><tr><th>Planet</th><th>Sign</th><th>Degree</th><th>Star</th><th>House</th><th>Dignity</th></tr></thead><tbody>${ORDER.map(p=>{const x=pl[p];return `<tr><td>${P[p].n} (${P[p].v})${x.retro&&!['Ra','Ke'].includes(p)?' R':''}</td><td>${SIGNS[x.sign][0]}</td><td>${dms(x.lon)}</td><td>${x.nak.name} ${x.nak.pada}</td><td>${x.house}</td><td>${x.dig.label}</td></tr>`}).join('')}</tbody></table></div><p class="muted" style="font-size:.9rem">Sidereal positions, Lahiri ayanamsa ${dms(A.c.ay)}, whole-sign houses, mean nodes, Vimshottari dasha. Readings follow classical Parashari texts, written in plain English. For guidance and reflection only.</p>`);
+ document.getElementById('pages').innerHTML=h;
+ document.getElementById('toc').innerHTML=`<span class="lbl">Contents</span><ol>${CH.map(([id,t])=>`<li><a href="#${id}">${t}</a></li>`).join('')}</ol>`}
+mountForm(document.getElementById('details'),write);
+</script></body></html>
