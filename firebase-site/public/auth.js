@@ -10,7 +10,8 @@ const API = {
   open: (mode) => openDialog(mode || "signin"),
   signOut: async () => {}, saveChart: async () => {}, listCharts: async () => [], deleteChart: async () => {}
 };
-window.GK_AUTH = API;
+// Until Firebase settings are added, sign-in stays hidden and the site works as a free preview.
+if (configured) window.GK_AUTH = API;
 const announce = () => window.dispatchEvent(new CustomEvent("gk-auth"));
 
 /* ---------- plain-language error messages ---------- */
